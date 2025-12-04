@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GHC Business vs Enterprise - GitHub Copilot Q&A</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f7fa;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+        }
+
+        header h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .nav-links {
+            padding: 15px 30px;
+            background: #f8f9fa;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .nav-links a {
+            color: #667eea;
+            text-decoration: none;
+            margin-right: 20px;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .qa-item {
+            margin-bottom: 30px;
+            border-left: 4px solid #667eea;
+            padding-left: 20px;
+        }
+
+        .question {
+            font-weight: 600;
+            font-size: 1.1em;
+            color: #2d3748;
+            margin-bottom: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .question::before {
+            content: 'Q';
+            background: #667eea;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .answer {
+            margin-left: 40px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        .answer::before {
+            content: 'A: ';
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .answer ul, .answer ol {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        .answer li {
+            margin-bottom: 5px;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background: white;
+        }
+
+        .comparison-table th, .comparison-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .comparison-table th {
+            background: #667eea;
+            color: white;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .highlight {
+            background: #fef3c7;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: 500;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin: 2px;
+        }
+
+        .badge-business {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .badge-enterprise {
+            background: #8b5cf6;
+            color: white;
+        }
+
+        .badge-individual {
+            background: #10b981;
+            color: white;
+        }
+
+        footer {
+            background: #2d3748;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            body {padding: 10px;}
+            header {padding: 20px 15px;}
+            header h1 {font-size: 1.6em;}
+            header p {font-size: 0.95em;}
+            .nav-links {padding: 10px 15px;}
+            .nav-links a {margin-right: 10px; margin-bottom: 5px; font-size: 0.9em; display: inline-block;}
+            .content {padding: 20px;}
+            .qa-item {padding-left: 10px; border-left-width: 3px;}
+            .question {font-size: 1em;}
+            .answer {padding: 12px; font-size: 0.95em;}
+            .code-block {font-size: 0.8em; padding: 12px; overflow-x: auto;}
+            footer {padding: 15px; font-size: 0.9em;}
+        }
+        
+        @media (max-width: 480px) {
+            header h1 {font-size: 1.4em;}
+            .content {padding: 15px;}
+            .answer ul {margin-left: 15px;}
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+            .nav-links {
+                display: none;
+            }
+            .qa-item {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>💼 Topic 2: GHC Business vs Enterprise</h1>
+            <p>30 Comprehensive Questions & Answers</p>
+        </header>
+
+        <div class="nav-links">
+            <a href="index.html">← Back to Hub</a>
+            <a href="01-audit-log-events.html">← Previous</a>
+            <a href="03-content-exclusions.html">Next Topic →</a>
+        </div>
+
+        <div class="content">
+            <div class="qa-item">
+                <div class="question">What are the three main pricing tiers for GitHub Copilot?</div>
+                <div class="answer">
+                    The three main pricing tiers are:
+                    <ul>
+                        <li><span class="badge badge-individual">GitHub Copilot Individual</span> - For individual developers ($10/month or $100/year)</li>
+                        <li><span class="badge badge-business">GitHub Copilot Business</span> - For organizations ($19/user/month)</li>
+                        <li><span class="badge badge-enterprise">GitHub Copilot Enterprise</span> - For enterprises ($39/user/month)</li>
+                    </ul>
+                    Each tier builds upon the previous with additional features and capabilities.
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">What are the key differences between GitHub Copilot Business and Enterprise?</div>
+                <div class="answer">
+                    <table class="comparison-table">
+                        <tr>
+                            <th>Feature</th>
+                            <th>Business</th>
+                            <th>Enterprise</th>
+                        </tr>
+                        <tr>
+                            <td>Price per user/month</td>
+                            <td>$19</td>
+                            <td>$39</td>
+                        </tr>
+                        <tr>
+                            <td>Code completion</td>
+                            <td>✅ Yes</td>
+                            <td>✅ Yes</td>
+                        </tr>
+                        <tr>
+                            <td>Chat in IDE</td>
+                            <td>✅ Yes</td>
+                            <td>✅ Yes</td>
+                        </tr>
+                        <tr>
+                            <td>Content exclusions</td>
+                            <td>✅ Yes</td>
+                            <td>✅ Yes</td>
+                        </tr>
+                        <tr>
+                            <td>Audit logs</td>
+                            <td>✅ 90 days</td>
+                            <td>✅ 180 days</td>
+                        </tr>
+                        <tr>
+                            <td>GitHub.com chat</td>
+                            <td>❌ No</td>
+                            <td>✅ Yes</td>
+                        </tr>
+                        <tr>
+                            <td>Mobile app access</td>
+                            <td>❌ No</td>
+                            <td>✅ Yes</td>
+                        </tr>
+                        <tr>
+                            <td>CLI access</td>
+                            <td>❌ No</td>
+                            <td>✅ Yes</td>
+                        </tr>
+                        <tr>
+                            <td>Documentation search</td>
+                            <td>❌ No</td>
+                            <td>✅ Yes</td>
+                        </tr>
+                        <tr>
+                            <td>Pull request summaries</td>
+                            <td>❌ No</td>
+                            <td>✅ Yes</td>
+                        </tr>
+                        <tr>
+                            <td>Knowledge bases</td>
+                            <td>❌ No</td>
+                            <td>✅ Yes</td>
+                        </tr>
+                        <tr>
+                            <td>Fine-tuning capability</td>
+                            <td>❌ No</td>
+                            <td>✅ Yes (beta)</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">Which GitHub Copilot pricing plans exclude data from default training? (Choose two correct answers.)</div>
+                <div class="answer">
+                    The correct answers are:
+                    <ul>
+                        <li><strong>A. GitHub Copilot Business</strong> ✅</li>
+                        <li><strong>D. GitHub Copilot Enterprise</strong> ✅</li>
+                    </ul>
+                    Both Business and Enterprise plans protect your data from being used to train GitHub Copilot's models. Your prompts, suggestions, and code snippets are NOT shared with other users or used for model training. GitHub Copilot Individual does not have this protection.
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">What is GitHub Copilot Chat on GitHub.com and which plan includes it?</div>
+                <div class="answer">
+                    GitHub Copilot Chat on GitHub.com is a web-based chat interface that allows you to:
+                    <ul>
+                        <li>Ask questions about your repositories directly on GitHub</li>
+                        <li>Get code explanations and suggestions</li>
+                        <li>Receive help with pull requests and issues</li>
+                        <li>Search across your organization's codebase</li>
+                    </ul>
+                    <strong>Availability:</strong> <span class="badge badge-enterprise">GitHub Copilot Enterprise ONLY</span>
+                    <br><br>
+                    This feature is NOT available in Business or Individual plans.
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">Can GitHub Copilot Individual users access content exclusion features?</div>
+                <div class="answer">
+                    <strong>No.</strong> Content exclusion features are only available in:
+                    <ul>
+                        <li><span class="badge badge-business">GitHub Copilot Business</span></li>
+                        <li><span class="badge badge-enterprise">GitHub Copilot Enterprise</span></li>
+                    </ul>
+                    Individual plan users cannot configure organization-level content exclusions. This is an organizational feature requiring admin-level management, which Individual plans don't support.
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">What is the minimum number of seats required for GitHub Copilot Business?</div>
+                <div class="answer">
+                    GitHub Copilot Business requires a <strong>minimum of 1 seat</strong>. There is no enforced minimum purchase quantity, making it flexible for organizations of any size.
+                    <br><br>
+                    Key points:
+                    <ul>
+                        <li>Billed per active seat per month</li>
+                        <li>Can add/remove seats as needed</li>
+                        <li>Pro-rated billing for partial months</li>
+                        <li>Organization-level license management</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">What Enterprise-exclusive feature allows Copilot to learn from your organization's codebase?</div>
+                <div class="answer">
+                    <strong>Knowledge Bases</strong> (Enterprise-only feature) allow GitHub Copilot to:
+                    <ul>
+                        <li>Index your organization's repositories</li>
+                        <li>Understand your coding patterns and conventions</li>
+                        <li>Provide context-aware suggestions based on your codebase</li>
+                        <li>Answer questions about your specific code and documentation</li>
+                        <li>Maintain awareness of internal APIs and libraries</li>
+                    </ul>
+                    This feature makes Copilot more relevant and useful for enterprise developers working with proprietary codebases.
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">Can GitHub Copilot Business users access the GitHub Mobile app with Copilot features?</div>
+                <div class="answer">
+                    <strong>No.</strong> GitHub Copilot on mobile devices is exclusive to <span class="badge badge-enterprise">GitHub Copilot Enterprise</span>.
+                    <br><br>
+                    Enterprise mobile features include:
+                    <ul>
+                        <li>Code suggestions on mobile</li>
+                        <li>Chat interface in GitHub Mobile app</li>
+                        <li>Repository search and navigation with AI assistance</li>
+                        <li>Pull request reviews with Copilot insights</li>
+                    </ul>
+                    Business and Individual users can only access Copilot through desktop IDEs.
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">What is GitHub Copilot CLI and which plans include it?</div>
+                <div class="answer">
+                    <strong>GitHub Copilot CLI</strong> is a command-line interface tool that provides:
+                    <ul>
+                        <li>Natural language to command translation</li>
+                        <li>Shell command suggestions</li>
+                        <li>Git command assistance</li>
+                        <li>GitHub CLI integration</li>
+                    </ul>
+                    <strong>Availability:</strong>
+                    <ul>
+                        <li><span class="badge badge-individual">Individual</span> - ✅ Yes (via gh copilot extension)</li>
+                        <li><span class="badge badge-business">Business</span> - ❌ No (organization access)</li>
+                        <li><span class="badge badge-enterprise">Enterprise</span> - ✅ Yes</li>
+                    </ul>
+                    Note: Business plan has limited CLI access through individual GitHub CLI extension, but not full organizational CLI features.
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">How do pull request summaries work in GitHub Copilot Enterprise?</div>
+                <div class="answer">
+                    Pull Request Summaries (Enterprise-only) automatically:
+                    <ul>
+                        <li><strong>Analyze changes:</strong> Review code diffs in the PR</li>
+                        <li><strong>Generate descriptions:</strong> Create clear, concise PR descriptions</li>
+                        <li><strong>Identify impacts:</strong> Highlight affected areas and potential risks</li>
+                        <li><strong>Suggest reviewers:</strong> Recommend appropriate code reviewers</li>
+                        <li><strong>Summarize discussions:</strong> Condense comment threads</li>
+                    </ul>
+                    This saves time in code review processes and improves PR quality. Not available in Business or Individual plans.
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">What audit log retention period is available for each plan?</div>
+                <div class="answer">
+                    Audit log retention by plan:
+                    <ul>
+                        <li><span class="badge badge-individual">Individual</span> - ❌ No audit logs</li>
+                        <li><span class="badge badge-business">Business</span> - ✅ 90 days retention</li>
+                        <li><span class="badge badge-enterprise">Enterprise</span> - ✅ 180 days retention</li>
+                    </ul>
+                    Both Business and Enterprise can extend retention indefinitely through:
+                    <ul>
+                        <li>Audit log streaming to external SIEM systems</li>
+                        <li>Programmatic exports via REST API</li>
+                        <li>Integration with cloud storage solutions</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">Can organizations mix GitHub Copilot Business and Enterprise licenses?</div>
+                <div class="answer">
+                    <strong>Yes</strong>, but with limitations:
+                    <ul>
+                        <li>Enterprise features require <strong>GitHub Enterprise Cloud</strong> organization</li>
+                        <li>Business can be purchased for GitHub Team or Enterprise organizations</li>
+                        <li>Cannot assign both license types to same user simultaneously</li>
+                        <li>Users get features based on their assigned license tier</li>
+                    </ul>
+                    <strong>Common scenario:</strong> Organization uses Enterprise for core developers and Business for occasional contributors to optimize costs.
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">What is the key data privacy difference between Individual and Business/Enterprise plans?</div>
+                <div class="answer">
+                    <strong>Critical difference:</strong>
+                    <br><br>
+                    <span class="badge badge-individual">Individual Plan</span>
+                    <ul>
+                        <li>Your code snippets MAY be used for model training</li>
+                        <li>Your prompts and suggestions MAY be retained</li>
+                        <li>Your data MAY be shared with OpenAI for model improvement</li>
+                        <li>Less privacy protection</li>
+                    </ul>
+                    <span class="badge badge-business">Business</span> / <span class="badge badge-enterprise">Enterprise</span>
+                    <ul>
+                        <li>Your data is <strong>NEVER used for training</strong></li>
+                        <li>Your prompts and code are <strong>NOT shared</strong> with other users</li>
+                        <li>Data remains within your organization's security boundary</li>
+                        <li>Full data privacy and IP protection</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">Which plan is required to search and chat across an organization's documentation?</div>
+                <div class="answer">
+                    <span class="badge badge-enterprise">GitHub Copilot Enterprise ONLY</span>
+                    <br><br>
+                    Enterprise documentation features include:
+                    <ul>
+                        <li><strong>Documentation indexing:</strong> Search across wikis, READMEs, and docs</li>
+                        <li><strong>Context-aware answers:</strong> Responses based on your org's docs</li>
+                        <li><strong>Knowledge integration:</strong> Combines code and documentation insights</li>
+                        <li><strong>Natural language queries:</strong> Ask questions in plain English</li>
+                    </ul>
+                    Business and Individual plans cannot access organizational documentation search.
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">What are the billing cycle options for GitHub Copilot plans?</div>
+                <div class="answer">
+                    Billing options by plan:
+                    <br><br>
+                    <span class="badge badge-individual">Individual</span>
+                    <ul>
+                        <li>Monthly: $10/month</li>
+                        <li>Annual: $100/year (save ~17%)</li>
+                    </ul>
+                    <span class="badge badge-business">Business</span>
+                    <ul>
+                        <li>Monthly only: $19/user/month</li>
+                        <li>Pro-rated for partial months</li>
+                    </ul>
+                    <span class="badge badge-enterprise">Enterprise</span>
+                    <ul>
+                        <li>Monthly only: $39/user/month</li>
+                        <li>Pro-rated for partial months</li>
+                        <li>Volume discounts may be available (contact sales)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">Can GitHub Copilot Business users access Copilot in VS Code, Visual Studio, and JetBrains IDEs?</div>
+                <div class="answer">
+                    <strong>Yes!</strong> All three plans (Individual, Business, Enterprise) support:
+                    <ul>
+                        <li>✅ Visual Studio Code</li>
+                        <li>✅ Visual Studio</li>
+                        <li>✅ JetBrains IDEs (IntelliJ, PyCharm, WebStorm, etc.)</li>
+                        <li>✅ Neovim</li>
+                        <li>✅ Azure Data Studio</li>
+                    </ul>
+                    IDE support is consistent across all plans. The differences are in organizational features, web access, and mobile support.
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">What is model customization/fine-tuning and which plan offers it?</div>
+                <div class="answer">
+                    <strong>Model Fine-tuning</strong> (Enterprise beta feature) allows organizations to:
+                    <ul>
+                        <li>Train Copilot on your organization's specific coding patterns</li>
+                        <li>Improve suggestion relevance for proprietary frameworks</li>
+                        <li>Maintain consistency with internal coding standards</li>
+                        <li>Enhance accuracy for domain-specific languages/frameworks</li>
+                    </ul>
+                    <strong>Availability:</strong>
+                    <ul>
+                        <li><span class="badge badge-individual">Individual</span> - ❌ No</li>
+                        <li><span class="badge badge-business">Business</span> - ❌ No</li>
+                        <li><span class="badge badge-enterprise">Enterprise</span> - ✅ Yes (Beta)</li>
+                    </ul>
+                    This is one of the most advanced Enterprise-exclusive features.
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">How do organizations manage seat assignments for Business and Enterprise plans?</div>
+                <div class="answer">
+                    Seat management process:
+                    <ol>
+                        <li><strong>Organization settings:</strong> Navigate to organization Copilot settings</li>
+                        <li><strong>Assignment methods:</strong>
+                            <ul>
+                                <li>Individual user assignment</li>
+                                <li>Team-based assignment</li>
+                                <li>Organization-wide enablement</li>
+                            </ul>
+                        </li>
+                        <li><strong>Access control:</strong> Integrate with GitHub teams and permissions</li>
+                        <li><strong>Monitoring:</strong> Track active/inactive seats via audit logs</li>
+                        <li><strong>Adjustment:</strong> Add/remove seats anytime with pro-rated billing</li>
+                    </ol>
+                    Organization owners and billing managers can manage seat assignments.
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">What happens to user access when switching from Business to Enterprise?</div>
+                <div class="answer">
+                    When upgrading from Business to Enterprise:
+                    <ul>
+                        <li>✅ <strong>Seamless transition:</strong> No service interruption</li>
+                        <li>✅ <strong>Automatic enablement:</strong> Enterprise features become immediately available</li>
+                        <li>✅ <strong>Billing adjustment:</strong> Pro-rated upgrade charges</li>
+                        <li>✅ <strong>Settings preserved:</strong> Existing configurations remain intact</li>
+                        <li>✅ <strong>New features:</strong> Users gain access to GitHub.com chat, mobile, CLI, etc.</li>
+                    </ul>
+                    Downgrading (Enterprise → Business) requires careful planning as users will lose Enterprise features.
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">Can educational institutions or open source projects get discounted GitHub Copilot access?</div>
+                <div class="answer">
+                    <strong>Yes!</strong> Special programs include:
+                    <br><br>
+                    <strong>🎓 Students & Teachers:</strong>
+                    <ul>
+                        <li>FREE GitHub Copilot Individual via GitHub Education</li>
+                        <li>Requires verified student/teacher status</li>
+                        <li>Access to Individual plan features</li>
+                    </ul>
+                    <strong>🔓 Open Source Maintainers:</strong>
+                    <ul>
+                        <li>FREE GitHub Copilot Individual for verified maintainers</li>
+                        <li>Must maintain popular open source projects</li>
+                        <li>Application required</li>
+                    </ul>
+                    These programs do not apply to Business or Enterprise plans.
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">What IDE chat capabilities differ between Business and Enterprise?</div>
+                <div class="answer">
+                    <strong>Both Business and Enterprise</strong> include IDE chat with:
+                    <ul>
+                        <li>Code explanations</li>
+                        <li>Error fixing suggestions</li>
+                        <li>Test generation</li>
+                        <li>Code refactoring</li>
+                        <li>Multi-file context awareness</li>
+                    </ul>
+                    <strong>Enterprise additional capabilities:</strong>
+                    <ul>
+                        <li>✨ Organization codebase context (knowledge bases)</li>
+                        <li>✨ Internal documentation integration</li>
+                        <li>✨ Repository-wide semantic search</li>
+                        <li>✨ Custom model fine-tuning benefits</li>
+                    </ul>
+                    The core chat experience is similar, but Enterprise provides richer organizational context.
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">How do content exclusions work differently in Business vs Enterprise?</div>
+                <div class="answer">
+                    Content exclusions are <strong>functionally identical</strong> in both plans:
+                    <ul>
+                        <li>✅ Repository-level exclusions</li>
+                        <li>✅ File path pattern exclusions</li>
+                        <li>✅ .copilotignore file support</li>
+                        <li>✅ Organization-wide policy enforcement</li>
+                    </ul>
+                    <strong>The difference:</strong>
+                    <ul>
+                        <li>Enterprise may have enhanced audit logging detail</li>
+                        <li>Enterprise users get longer retention of exclusion-related audit events (180 vs 90 days)</li>
+                    </ul>
+                    The exclusion capabilities themselves are the same.
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">What support level comes with each GitHub Copilot plan?</div>
+                <div class="answer">
+                    Support levels:
+                    <br><br>
+                    <span class="badge badge-individual">Individual</span>
+                    <ul>
+                        <li>Community support (GitHub Community forum)</li>
+                        <li>Documentation and guides</li>
+                        <li>No dedicated support SLA</li>
+                    </ul>
+                    <span class="badge badge-business">Business</span>
+                    <ul>
+                        <li>GitHub Support (standard response times)</li>
+                        <li>Email and web ticket support</li>
+                        <li>Documentation access</li>
+                        <li>Follows organization's GitHub plan support level</li>
+                    </ul>
+                    <span class="badge badge-enterprise">Enterprise</span>
+                    <ul>
+                        <li>Priority GitHub Support</li>
+                        <li>Faster response times</li>
+                        <li>Dedicated support resources</li>
+                        <li>Premium support options available</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">Can GitHub Copilot Business be purchased without a GitHub Team or Enterprise subscription?</div>
+                <div class="answer">
+                    <strong>Yes</strong>, but with requirements:
+                    <ul>
+                        <li>You need a <span class="highlight">GitHub organization</span> (can be free tier)</li>
+                        <li>Copilot Business can be added to any organization</li>
+                        <li>Does NOT require GitHub Team ($4/user/month) or Enterprise Cloud</li>
+                    </ul>
+                    <strong>GitHub Copilot Enterprise</strong> specifically requires:
+                    <ul>
+                        <li>GitHub Enterprise Cloud subscription</li>
+                        <li>Cannot be purchased standalone</li>
+                    </ul>
+                    Business is more flexible for smaller organizations.
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">What metrics and analytics are available in Business vs Enterprise?</div>
+                <div class="answer">
+                    <span class="badge badge-business">Business</span> metrics:
+                    <ul>
+                        <li>Seat utilization (active/inactive)</li>
+                        <li>Basic usage statistics</li>
+                        <li>90-day audit logs</li>
+                        <li>API access for metrics</li>
+                    </ul>
+                    <span class="badge badge-enterprise">Enterprise</span> enhanced metrics:
+                    <ul>
+                        <li>All Business metrics PLUS:</li>
+                        <li>Advanced usage analytics</li>
+                        <li>Repository-level insights</li>
+                        <li>Team-level adoption tracking</li>
+                        <li>180-day audit logs</li>
+                        <li>Custom reporting capabilities</li>
+                        <li>Integration with enterprise analytics platforms</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">How does the 'public code matching' feature differ across plans?</div>
+                <div class="answer">
+                    Public code matching (duplication detection) is <strong>available in ALL plans</strong>:
+                    <ul>
+                        <li><span class="badge badge-individual">Individual</span> - ✅ Configurable by user</li>
+                        <li><span class="badge badge-business">Business</span> - ✅ Configurable by organization admins</li>
+                        <li><span class="badge badge-enterprise">Enterprise</span> - ✅ Configurable by organization admins</li>
+                    </ul>
+                    <strong>Key difference:</strong>
+                    <ul>
+                        <li>Individual: User controls their own settings</li>
+                        <li>Business/Enterprise: Organization policy can enforce blocking of public code matches</li>
+                    </ul>
+                    This helps prevent accidental GPL license violations and ensures code originality.
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">Can trial periods be obtained for Business or Enterprise plans?</div>
+                <div class="answer">
+                    <strong>Yes!</strong> Trial availability:
+                    <br><br>
+                    <span class="badge badge-business">Business</span>
+                    <ul>
+                        <li>✅ Typically 30-day free trial</li>
+                        <li>Available through GitHub UI (organization settings)</li>
+                        <li>Credit card may be required</li>
+                        <li>Full feature access during trial</li>
+                    </ul>
+                    <span class="badge badge-enterprise">Enterprise</span>
+                    <ul>
+                        <li>✅ Trial available (duration varies)</li>
+                        <li>Contact GitHub Sales for setup</li>
+                        <li>May include proof-of-concept support</li>
+                        <li>Custom trial terms possible</li>
+                    </ul>
+                    Trials allow organizations to evaluate ROI before committing.
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">What happens to Copilot access when a user leaves an organization?</div>
+                <div class="answer">
+                    When a user is removed from an organization:
+                    <ul>
+                        <li>🔴 <strong>Immediate access revocation:</strong> Copilot access is removed automatically</li>
+                        <li>💰 <strong>Billing adjustment:</strong> Seat is freed and no longer charged (pro-rated)</li>
+                        <li>📊 <strong>Audit logging:</strong> 'copilot.seat_unassigned' event is generated</li>
+                        <li>🔄 <strong>Seat reallocation:</strong> Seat becomes available for reassignment</li>
+                        <li>📝 <strong>User data:</strong> Organization-specific settings are cleared</li>
+                    </ul>
+                    The user can no longer use Copilot unless they:
+                    <ul>
+                        <li>Join another organization with Copilot</li>
+                        <li>Purchase an Individual plan</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">Which plan is most suitable for a 50-person startup building a SaaS product?</div>
+                <div class="answer">
+                    <strong>Recommendation: <span class="badge badge-business">GitHub Copilot Business</span></strong>
+                    <br><br>
+                    <strong>Reasoning:</strong>
+                    <ul>
+                        <li>✅ Data privacy protection (code not used for training)</li>
+                        <li>✅ Affordable at $19/user/month ($950/month total)</li>
+                        <li>✅ Content exclusions for sensitive code</li>
+                        <li>✅ Audit logs for compliance</li>
+                        <li>✅ Organization-level management</li>
+                        <li>✅ IDE support for all developers</li>
+                    </ul>
+                    <strong>Enterprise might be overkill because:</strong>
+                    <ul>
+                        <li>❌ Double the cost ($1,950/month)</li>
+                        <li>❌ Features like knowledge bases less critical for smaller codebase</li>
+                        <li>❌ Mobile/GitHub.com chat nice-to-have but not essential</li>
+                    </ul>
+                    Startups can upgrade to Enterprise later as they scale and need advanced features.
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">How do language and framework support compare across Business and Enterprise?</div>
+                <div class="answer">
+                    <strong>Language/framework support is IDENTICAL</strong> across all plans:
+                    <ul>
+                        <li>All plans use the same underlying AI models</li>
+                        <li>Support for 50+ programming languages</li>
+                        <li>Framework-agnostic suggestions</li>
+                        <li>Regular model updates apply to all tiers</li>
+                    </ul>
+                    <strong>Enterprise advantage:</strong>
+                    <ul>
+                        <li>Fine-tuning can improve suggestions for custom frameworks</li>
+                        <li>Knowledge bases help with internal libraries</li>
+                        <li>Better context from organization documentation</li>
+                    </ul>
+                    The base AI capabilities are the same; Enterprise adds customization layers.
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">What are the key decision factors when choosing between Business and Enterprise?</div>
+                <div class="answer">
+                    <strong>Choose Business if:</strong>
+                    <ul>
+                        <li>Primary need is IDE code completion and chat</li>
+                        <li>Budget-conscious (half the cost of Enterprise)</li>
+                        <li>Team size is small to medium (&lt;100 developers)</li>
+                        <li>Don't require mobile or GitHub.com access</li>
+                        <li>90-day audit logs are sufficient</li>
+                    </ul>
+                    <strong>Choose Enterprise if:</strong>
+                    <ul>
+                        <li>Need organization-wide knowledge base integration</li>
+                        <li>Require mobile app access for developers</li>
+                        <li>Want GitHub.com chat and PR summaries</li>
+                        <li>Need model fine-tuning for proprietary frameworks</li>
+                        <li>Require 180-day audit retention</li>
+                        <li>Have GitHub Enterprise Cloud already</li>
+                        <li>Large development team (&gt;100 developers)</li>
+                    </ul>
+                    Consider conducting trials of both to assess actual value.
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>GitHub Copilot Q&A - Topic 2 of 11 | © 2025</p>
+        </footer>
+    </div>
+
+    <script>
+        document.querySelectorAll('.question').forEach(question => {
+            question.addEventListener('click', function() {
+                const answer = this.nextElementSibling;
+                answer.style.display = answer.style.display === 'none' ? 'block' : 'none';
+            });
+        });
+    </script>
+</body>
+</html>

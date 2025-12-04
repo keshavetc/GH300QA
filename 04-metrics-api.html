@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metrics API & REST API - GitHub Copilot Q&A</title>
+    <style>
+        * {margin: 0; padding: 0; box-sizing: border-box;}
+        body {font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background: #f5f7fa; padding: 20px;}
+        .container {max-width: 1000px; margin: 0 auto; background: white; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); overflow: hidden;}
+        header {background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px;}
+        header h1 {font-size: 2em; margin-bottom: 10px;}
+        .nav-links {padding: 15px 30px; background: #f8f9fa; border-bottom: 2px solid #e9ecef;}
+        .nav-links a {color: #667eea; text-decoration: none; margin-right: 20px; font-weight: 500;}
+        .nav-links a:hover {text-decoration: underline;}
+        .content {padding: 40px;}
+        .qa-item {margin-bottom: 30px; border-left: 4px solid #667eea; padding-left: 20px;}
+        .question {font-weight: 600; font-size: 1.1em; color: #2d3748; margin-bottom: 10px; cursor: pointer; display: flex; align-items: center; gap: 10px;}
+        .question::before {content: 'Q'; background: #667eea; color: white; width: 30px; height: 30px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0;}
+        .answer {margin-left: 40px; padding: 15px; background: #f8f9fa; border-radius: 8px; margin-top: 10px;}
+        .answer::before {content: 'A: '; font-weight: bold; color: #667eea;}
+        .answer ul, .answer ol {margin-left: 20px; margin-top: 10px;}
+        .answer li {margin-bottom: 5px;}
+        .code-block {background: #2d3748; color: #68d391; padding: 15px; border-radius: 5px; margin: 10px 0; overflow-x: auto; font-family: 'Courier New', monospace; font-size: 0.85em; line-height: 1.4;}
+        .highlight {background: #fef3c7; padding: 2px 6px; border-radius: 3px; font-weight: 500;}
+        footer {background: #2d3748; color: white; text-align: center; padding: 20px;}
+        
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            body {padding: 10px;}
+            header {padding: 20px 15px;}
+            header h1 {font-size: 1.6em;}
+            .nav-links {padding: 10px 15px;}
+            .nav-links a {font-size: 0.9em; margin-bottom: 5px; display: inline-block;}
+            .content {padding: 20px;}
+            .qa-item {padding-left: 10px;}
+            .question {font-size: 1em;}
+            .answer {padding: 12px; font-size: 0.95em;}
+            .code-block {font-size: 0.8em; padding: 12px;}
+            footer {padding: 15px; font-size: 0.9em;}
+        }
+        @media (max-width: 480px) {
+            header h1 {font-size: 1.4em;}
+            .content {padding: 15px;}
+        }
+        
+        @media print {body {background: white;} .nav-links {display: none;} .qa-item {page-break-inside: avoid;}}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 Topic 4: Metrics API & REST API Usage</h1>
+            <p>30 Comprehensive Questions & Answers</p>
+        </header>
+
+        <div class="nav-links">
+            <a href="index.html">← Back to Hub</a>
+            <a href="03-content-exclusions.html">← Previous</a>
+            <a href="05-cli-commands.html">Next Topic →</a>
+        </div>
+
+        <div class="content">
+            <div class="qa-item">
+                <div class="question">What is the GitHub Copilot Metrics API?</div>
+                <div class="answer">
+                    The GitHub Copilot Metrics API is a REST API that allows organizations to programmatically access usage data, adoption metrics, and performance statistics for GitHub Copilot. It enables:
+                    <ul>
+                        <li><strong>Usage tracking:</strong> Monitor how developers use Copilot</li>
+                        <li><strong>Adoption metrics:</strong> Measure feature adoption across teams</li>
+                        <li><strong>ROI analysis:</strong> Calculate value and productivity gains</li>
+                        <li><strong>Custom reporting:</strong> Build dashboards and reports</li>
+                        <li><strong>Integration:</strong> Connect with analytics platforms</li>
+                    </ul>
+                    Available for GitHub Copilot Business and Enterprise plans.
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">What authentication is required to access the GitHub Copilot API?</div>
+                <div class="answer">
+                    Authentication methods:
+                    <ul>
+                        <li><strong>Personal Access Token (PAT):</strong> Classic or fine-grained tokens</li>
+                        <li><strong>GitHub App:</strong> Organization-installed apps with appropriate permissions</li>
+                        <li><strong>OAuth App:</strong> For user-authorized applications</li>
+                    </ul>
+                    <strong>Required scopes/permissions:</strong>
+                    <ul>
+                        <li><code>copilot</code> - Access Copilot data</li>
+                        <li><code>read:org</code> - Read organization data</li>
+                        <li><code>admin:org</code> - For seat management operations</li>
+                    </ul>
+                    <strong>Example header:</strong>
+                    <div class="code-block">
+Authorization: Bearer YOUR_GITHUB_TOKEN<br>
+Accept: application/vnd.github+json<br>
+X-GitHub-Api-Version: 2022-11-28
+                    </div>
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">What are the main GitHub Copilot API endpoints?</div>
+                <div class="answer">
+                    <strong>Key endpoints:</strong>
+                    <div class="code-block">
+# Get organization Copilot metrics<br>
+GET /orgs/{org}/copilot/metrics<br>
+<br>
+# Get team Copilot metrics<br>
+GET /orgs/{org}/team/{team_slug}/copilot/metrics<br>
+<br>
+# List Copilot seats<br>
+GET /orgs/{org}/copilot/billing/seats<br>
+<br>
+# Manage seat assignments<br>
+POST /orgs/{org}/copilot/billing/selected_users<br>
+DELETE /orgs/{org}/copilot/billing/selected_users<br>
+<br>
+# Get usage summary<br>
+GET /orgs/{org}/copilot/usage<br>
+<br>
+# Enterprise endpoints<br>
+GET /enterprises/{enterprise}/copilot/metrics<br>
+GET /enterprises/{enterprise}/copilot/usage
+                    </div>
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">What metrics can you retrieve from the Copilot Metrics API?</div>
+                <div class="answer">
+                    Available metrics include:
+                    <ul>
+                        <li><strong>Acceptance Rate:</strong> % of suggestions accepted by developers</li>
+                        <li><strong>Active Users:</strong> Number of users actively using Copilot</li>
+                        <li><strong>Suggestions Count:</strong> Total suggestions generated</li>
+                        <li><strong>Lines Suggested:</strong> Total lines of code suggested</li>
+                        <li><strong>Lines Accepted:</strong> Total lines accepted by developers</li>
+                        <li><strong>Language Breakdown:</strong> Usage by programming language</li>
+                        <li><strong>Editor Distribution:</strong> Usage by IDE (VS Code, Visual Studio, etc.)</li>
+                        <li><strong>Chat Interactions:</strong> Copilot Chat usage statistics</li>
+                        <li><strong>Time Saved:</strong> Estimated productivity gains</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">How do you retrieve organization-level Copilot metrics using the API?</div>
+                <div class="answer">
+                    <strong>Example API call:</strong>
+                    <div class="code-block">
+curl -L \<br>
+  -H "Accept: application/vnd.github+json" \<br>
+  -H "Authorization: Bearer YOUR_TOKEN" \<br>
+  -H "X-GitHub-Api-Version: 2022-11-28" \<br>
+  https://api.github.com/orgs/YOUR_ORG/copilot/metrics
+                    </div>
+                    <strong>Query parameters:</strong>
+                    <ul>
+                        <li><code>since</code> - Start date (ISO 8601 format)</li>
+                        <li><code>until</code> - End date (ISO 8601 format)</li>
+                        <li><code>page</code> - Pagination page number</li>
+                        <li><code>per_page</code> - Results per page (default: 30, max: 100)</li>
+                    </ul>
+                    <strong>Example with date range:</strong>
+                    <div class="code-block">
+GET /orgs/acme-corp/copilot/metrics?since=2025-11-01&until=2025-12-01
+                    </div>
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">What does a typical Copilot metrics API response look like?</div>
+                <div class="answer">
+                    <strong>Example JSON response:</strong>
+                    <div class="code-block">
+{<br>
+  "date": "2025-12-01",<br>
+  "total_suggestions": 15420,<br>
+  "total_acceptances": 10892,<br>
+  "total_lines_suggested": 48650,<br>
+  "total_lines_accepted": 35240,<br>
+  "total_active_users": 87,<br>
+  "total_chat_acceptances": 2340,<br>
+  "total_chat_turns": 8920,<br>
+  "acceptance_rate": 0.706,<br>
+  "breakdown": [<br>
+    {<br>
+      "language": "python",<br>
+      "suggestions": 4820,<br>
+      "acceptances": 3456<br>
+    },<br>
+    {<br>
+      "language": "javascript",<br>
+      "suggestions": 3940,<br>
+      "acceptances": 2876<br>
+    },<br>
+    {<br>
+      "language": "typescript",<br>
+      "suggestions": 2850,<br>
+      "acceptances": 2103<br>
+    }<br>
+  ],<br>
+  "editors": [<br>
+    {"editor": "vscode", "users": 65},<br>
+    {"editor": "visual_studio", "users": 12},<br>
+    {"editor": "jetbrains", "users": 10}<br>
+  ]<br>
+}
+                    </div>
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">How can you retrieve Copilot seat information via API?</div>
+                <div class="answer">
+                    <strong>List all seats:</strong>
+                    <div class="code-block">
+GET /orgs/{org}/copilot/billing/seats
+                    </div>
+                    <strong>Response includes:</strong>
+                    <ul>
+                        <li>User login and ID</li>
+                        <li>Seat assignment date</li>
+                        <li>Last activity timestamp</li>
+                        <li>Seat type (assigned via team or direct)</li>
+                        <li>Organization/enterprise context</li>
+                    </ul>
+                    <strong>Example response:</strong>
+                    <div class="code-block">
+{<br>
+  "total_seats": 150,<br>
+  "seats": [<br>
+    {<br>
+      "created_at": "2025-01-15T08:00:00Z",<br>
+      "updated_at": "2025-12-03T15:30:00Z",<br>
+      "pending_cancellation_date": null,<br>
+      "last_activity_at": "2025-12-03T15:30:00Z",<br>
+      "last_activity_editor": "vscode",<br>
+      "assignee": {<br>
+        "login": "developer1",<br>
+        "id": 12345,<br>
+        "type": "User"<br>
+      }<br>
+    }<br>
+  ]<br>
+}
+                    </div>
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">Can you assign Copilot seats programmatically via API?</div>
+                <div class="answer">
+                    <strong>Yes!</strong> Use the seat assignment endpoint:
+                    <div class="code-block">
+POST /orgs/{org}/copilot/billing/selected_users
+                    </div>
+                    <strong>Request body:</strong>
+                    <div class="code-block">
+{<br>
+  "selected_usernames": [<br>
+    "developer1",<br>
+    "developer2",<br>
+    "developer3"<br>
+  ]<br>
+}
+                    </div>
+                    <strong>Example with curl:</strong>
+                    <div class="code-block">
+curl -X POST \<br>
+  -H "Authorization: Bearer YOUR_TOKEN" \<br>
+  -H "Accept: application/vnd.github+json" \<br>
+  -H "X-GitHub-Api-Version: 2022-11-28" \<br>
+  https://api.github.com/orgs/YOUR_ORG/copilot/billing/selected_users \<br>
+  -d '{"selected_usernames":["dev1","dev2"]}'
+                    </div>
+                    <strong>Permissions required:</strong> <code>admin:org</code> scope
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">How do you remove Copilot seat assignments via API?</div>
+                <div class="answer">
+                    <strong>Remove seats:</strong>
+                    <div class="code-block">
+DELETE /orgs/{org}/copilot/billing/selected_users
+                    </div>
+                    <strong>Request body:</strong>
+                    <div class="code-block">
+{<br>
+  "selected_usernames": [<br>
+    "developer1",<br>
+    "developer2"<br>
+  ]<br>
+}
+                    </div>
+                    <strong>Behavior:</strong>
+                    <ul>
+                        <li>Seats are removed immediately</li>
+                        <li>Users lose Copilot access</li>
+                        <li>Pro-rated billing adjustment applied</li>
+                        <li>Audit log event generated</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">What are the rate limits for GitHub Copilot API?</div>
+                <div class="answer">
+                    <strong>Standard GitHub API rate limits apply:</strong>
+                    <ul>
+                        <li><strong>Authenticated requests:</strong> 5,000 requests per hour</li>
+                        <li><strong>GitHub App:</strong> 5,000 requests per hour per installation</li>
+                        <li><strong>Enterprise:</strong> May have higher limits</li>
+                    </ul>
+                    <strong>Rate limit headers:</strong>
+                    <div class="code-block">
+X-RateLimit-Limit: 5000<br>
+X-RateLimit-Remaining: 4999<br>
+X-RateLimit-Reset: 1701705600<br>
+X-RateLimit-Used: 1
+                    </div>
+                    <strong>Best practices:</strong>
+                    <ul>
+                        <li>Cache responses when possible</li>
+                        <li>Use conditional requests (ETags)</li>
+                        <li>Implement exponential backoff on 429 errors</li>
+                        <li>Monitor rate limit headers</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">How can you filter metrics by team using the API?</div>
+                <div class="answer">
+                    <strong>Team-specific endpoint:</strong>
+                    <div class="code-block">
+GET /orgs/{org}/team/{team_slug}/copilot/metrics
+                    </div>
+                    <strong>Example:</strong>
+                    <div class="code-block">
+GET /orgs/acme-corp/team/backend-team/copilot/metrics?since=2025-11-01
+                    </div>
+                    <strong>Use cases:</strong>
+                    <ul>
+                        <li>Compare adoption across different teams</li>
+                        <li>Identify high-performing teams</li>
+                        <li>Target training to low-adoption teams</li>
+                        <li>Generate team-specific reports</li>
+                    </ul>
+                    <strong>Note:</strong> Requires organization admin permissions or team membership.
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">What is the difference between Metrics API and Usage API?</div>
+                <div class="answer">
+                    <strong>Metrics API (<code>/copilot/metrics</code>):</strong>
+                    <ul>
+                        <li>Detailed performance statistics</li>
+                        <li>Acceptance rates and quality metrics</li>
+                        <li>Language and editor breakdowns</li>
+                        <li>Daily/periodic data</li>
+                        <li>Focus on ROI and effectiveness</li>
+                    </ul>
+                    <strong>Usage API (<code>/copilot/usage</code>):</strong>
+                    <ul>
+                        <li>High-level usage summaries</li>
+                        <li>Active user counts</li>
+                        <li>Seat utilization</li>
+                        <li>Billing-related data</li>
+                        <li>Focus on consumption and costs</li>
+                    </ul>
+                    <strong>Recommendation:</strong> Use both for comprehensive analysis - Usage for capacity planning, Metrics for productivity insights.
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">Can you export Copilot metrics to CSV or other formats?</div>
+                <div class="answer">
+                    The API returns JSON by default. To export to other formats:
+                    <br><br>
+                    <strong>Option 1: Process JSON programmatically</strong>
+                    <div class="code-block">
+# Python example<br>
+import requests<br>
+import pandas as pd<br>
+<br>
+response = requests.get(<br>
+    'https://api.github.com/orgs/YOUR_ORG/copilot/metrics',<br>
+    headers={'Authorization': 'Bearer TOKEN'}<br>
+)<br>
+data = response.json()<br>
+df = pd.DataFrame(data)<br>
+df.to_csv('copilot_metrics.csv', index=False)
+                    </div>
+                    <strong>Option 2: Use jq for command-line conversion</strong>
+                    <div class="code-block">
+curl -H "Authorization: Bearer TOKEN" \<br>
+  https://api.github.com/orgs/YOUR_ORG/copilot/metrics \<br>
+  | jq -r '.[] | [.date, .total_suggestions, .acceptance_rate] | @csv' \<br>
+  > metrics.csv
+                    </div>
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">How do you build a dashboard using the Copilot API?</div>
+                <div class="answer">
+                    <strong>Dashboard implementation steps:</strong>
+                    <ol>
+                        <li><strong>Data Collection:</strong> Schedule periodic API calls (daily/weekly)</li>
+                        <li><strong>Data Storage:</strong> Store metrics in database (PostgreSQL, MongoDB)</li>
+                        <li><strong>Data Processing:</strong> Calculate trends, aggregations, KPIs</li>
+                        <li><strong>Visualization:</strong> Use tools like:
+                            <ul>
+                                <li>Grafana</li>
+                                <li>Power BI</li>
+                                <li>Tableau</li>
+                                <li>Custom React/Vue dashboard</li>
+                            </ul>
+                        </li>
+                    </ol>
+                    <strong>Key metrics to display:</strong>
+                    <ul>
+                        <li>Acceptance rate trend over time</li>
+                        <li>Active users vs. total seats</li>
+                        <li>Top programming languages</li>
+                        <li>Team comparison charts</li>
+                        <li>Cost per active user</li>
+                        <li>Estimated time saved</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">What error codes can the Copilot API return?</div>
+                <div class="answer">
+                    <strong>Common HTTP status codes:</strong>
+                    <ul>
+                        <li><strong>200 OK:</strong> Request successful</li>
+                        <li><strong>401 Unauthorized:</strong> Invalid or missing authentication token</li>
+                        <li><strong>403 Forbidden:</strong> Insufficient permissions or Copilot not enabled</li>
+                        <li><strong>404 Not Found:</strong> Organization/resource doesn't exist</li>
+                        <li><strong>422 Unprocessable Entity:</strong> Invalid request parameters</li>
+                        <li><strong>429 Too Many Requests:</strong> Rate limit exceeded</li>
+                        <li><strong>500 Internal Server Error:</strong> GitHub server issue</li>
+                        <li><strong>503 Service Unavailable:</strong> Temporary outage</li>
+                    </ul>
+                    <strong>Example error response:</strong>
+                    <div class="code-block">
+{<br>
+  "message": "Not Found",<br>
+  "documentation_url": "https://docs.github.com/rest/copilot"<br>
+}
+                    </div>
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">How can you automate Copilot seat assignments based on team membership?</div>
+                <div class="answer">
+                    <strong>Automation approach:</strong>
+                    <ol>
+                        <li><strong>Webhook listening:</strong> Listen for team membership changes</li>
+                        <li><strong>Periodic sync:</strong> Run scheduled job to sync teams with seats</li>
+                        <li><strong>Logic implementation:</strong>
+                            <ul>
+                                <li>Fetch team members via API</li>
+                                <li>Compare with current seat assignments</li>
+                                <li>Add/remove seats as needed</li>
+                            </ul>
+                        </li>
+                    </ol>
+                    <strong>Example workflow:</strong>
+                    <div class="code-block">
+# 1. Get team members<br>
+GET /orgs/{org}/teams/{team_slug}/members<br>
+<br>
+# 2. Get current seat assignments<br>
+GET /orgs/{org}/copilot/billing/seats<br>
+<br>
+# 3. Calculate differences<br>
+new_users = team_members - current_seats<br>
+removed_users = current_seats - team_members<br>
+<br>
+# 4. Update seats<br>
+POST /orgs/{org}/copilot/billing/selected_users (new_users)<br>
+DELETE /orgs/{org}/copilot/billing/selected_users (removed_users)
+                    </div>
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">Can you retrieve Enterprise-level Copilot metrics?</div>
+                <div class="answer">
+                    <strong>Yes, for GitHub Enterprise Cloud:</strong>
+                    <div class="code-block">
+GET /enterprises/{enterprise}/copilot/metrics<br>
+GET /enterprises/{enterprise}/copilot/usage
+                    </div>
+                    <strong>Enterprise metrics include:</strong>
+                    <ul>
+                        <li>Aggregated data across all organizations</li>
+                        <li>Cross-organization comparisons</li>
+                        <li>Enterprise-wide adoption rates</li>
+                        <li>Consolidated billing information</li>
+                    </ul>
+                    <strong>Permissions required:</strong>
+                    <ul>
+                        <li>Enterprise admin role</li>
+                        <li>Token with enterprise scope</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">How do you calculate ROI using Copilot API metrics?</div>
+                <div class="answer">
+                    <strong>ROI Calculation Formula:</strong>
+                    <div class="code-block">
+ROI = (Total Value - Total Cost) / Total Cost × 100%
+                    </div>
+                    <strong>Calculate Total Value:</strong>
+                    <ul>
+                        <li><strong>Time saved:</strong> (Lines accepted / Avg typing speed) × Hourly rate</li>
+                        <li><strong>Quality improvements:</strong> Reduced bugs × Cost per bug</li>
+                        <li><strong>Faster onboarding:</strong> New developer productivity gains</li>
+                    </ul>
+                    <strong>Example calculation:</strong>
+                    <div class="code-block">
+# From API metrics:<br>
+total_lines_accepted = 500,000 per month<br>
+active_users = 100<br>
+<br>
+# Assumptions:<br>
+avg_typing_speed = 50 lines/hour<br>
+avg_hourly_rate = $75<br>
+copilot_cost = $19/user/month = $1,900/month<br>
+<br>
+# Calculate time saved:<br>
+hours_saved = 500,000 / 50 = 10,000 hours<br>
+value_saved = 10,000 × $75 = $750,000<br>
+<br>
+# ROI:<br>
+ROI = ($750,000 - $1,900) / $1,900 × 100% = 39,373%
+                    </div>
+                    <strong>Note:</strong> Adjust assumptions based on your organization's specifics.
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">What pagination options are available for API responses?</div>
+                <div class="answer">
+                    <strong>Pagination parameters:</strong>
+                    <ul>
+                        <li><code>page</code> - Page number (default: 1)</li>
+                        <li><code>per_page</code> - Items per page (default: 30, max: 100)</li>
+                    </ul>
+                    <strong>Example:</strong>
+                    <div class="code-block">
+GET /orgs/acme/copilot/billing/seats?page=2&per_page=50
+                    </div>
+                    <strong>Response headers for pagination:</strong>
+                    <div class="code-block">
+Link: &lt;https://api.github.com/...?page=3&gt;; rel="next",<br>
+      &lt;https://api.github.com/...?page=10&gt;; rel="last",<br>
+      &lt;https://api.github.com/...?page=1&gt;; rel="first",<br>
+      &lt;https://api.github.com/...?page=1&gt;; rel="prev"
+                    </div>
+                    <strong>Best practice:</strong> Use Link header to navigate pages programmatically.
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">Can you retrieve historical metrics data from the API?</div>
+                <div class="answer">
+                    <strong>Yes</strong>, using date range parameters:
+                    <div class="code-block">
+GET /orgs/{org}/copilot/metrics?since=2025-01-01&until=2025-12-01
+                    </div>
+                    <strong>Date format:</strong> ISO 8601 (YYYY-MM-DD)
+                    <br><br>
+                    <strong>Retention period:</strong>
+                    <ul>
+                        <li><strong>Business:</strong> Typically 90 days of detailed metrics</li>
+                        <li><strong>Enterprise:</strong> Up to 180 days or more</li>
+                    </ul>
+                    <strong>For longer retention:</strong>
+                    <ul>
+                        <li>Regularly export and store metrics in your own database</li>
+                        <li>Build a data warehouse for long-term analysis</li>
+                        <li>Use scheduled jobs to archive monthly/quarterly data</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">How do you handle API authentication in a CI/CD pipeline?</div>
+                <div class="answer">
+                    <strong>Best practices:</strong>
+                    <ol>
+                        <li><strong>Use GitHub App:</strong> Better security and higher rate limits</li>
+                        <li><strong>Store tokens securely:</strong> GitHub Secrets, Azure Key Vault, AWS Secrets Manager</li>
+                        <li><strong>Rotate tokens regularly:</strong> Automated rotation policies</li>
+                        <li><strong>Limit token scope:</strong> Minimum permissions necessary</li>
+                    </ol>
+                    <strong>GitHub Actions example:</strong>
+                    <div class="code-block">
+name: Fetch Copilot Metrics<br>
+on:<br>
+  schedule:<br>
+    - cron: '0 0 * * *'  # Daily<br>
+<br>
+jobs:<br>
+  fetch-metrics:<br>
+    runs-on: ubuntu-latest<br>
+    steps:<br>
+      - name: Fetch metrics<br>
+        run: |<br>
+          curl -H "Authorization: Bearer ${{ secrets.GH_TOKEN }}" \<br>
+            https://api.github.com/orgs/${{ secrets.ORG }}/copilot/metrics \<br>
+            > metrics.json<br>
+      - name: Upload to storage<br>
+        run: |<br>
+          # Upload to S3, Azure Blob, etc.
+                    </div>
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">What webhooks are available for Copilot events?</div>
+                <div class="answer">
+                    <strong>Current limitation:</strong> GitHub does not offer dedicated Copilot-specific webhooks. However:
+                    <br><br>
+                    <strong>Alternative approaches:</strong>
+                    <ul>
+                        <li><strong>Audit log streaming:</strong> Stream Copilot-related audit events to your system</li>
+                        <li><strong>Polling:</strong> Regularly call Metrics API to check for updates</li>
+                        <li><strong>Organization webhooks:</strong> Listen for member changes, then sync seats</li>
+                    </ul>
+                    <strong>Events you can track via audit logs:</strong>
+                    <ul>
+                        <li>Seat assignments/removals</li>
+                        <li>Content exclusion changes</li>
+                        <li>Policy modifications</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">How can you monitor API health and availability?</div>
+                <div class="answer">
+                    <strong>Monitoring strategies:</strong>
+                    <ul>
+                        <li><strong>GitHub Status:</strong> Check https://www.githubstatus.com for API status</li>
+                        <li><strong>Synthetic monitoring:</strong> Run periodic health checks</li>
+                        <li><strong>Error tracking:</strong> Log and alert on API errors</li>
+                        <li><strong>Response time monitoring:</strong> Track API latency</li>
+                    </ul>
+                    <strong>Health check example:</strong>
+                    <div class="code-block">
+curl -I -H "Authorization: Bearer TOKEN" \<br>
+  https://api.github.com/orgs/YOUR_ORG/copilot/metrics
+                    </div>
+                    <strong>Alert on:</strong>
+                    <ul>
+                        <li>Response codes 5xx (server errors)</li>
+                        <li>Response time > 5 seconds</li>
+                        <li>Rate limit approaching (< 10% remaining)</li>
+                        <li>Authentication failures</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">Can you integrate Copilot metrics with Slack or Microsoft Teams?</div>
+                <div class="answer">
+                    <strong>Yes!</strong> Common integration patterns:
+                    <br><br>
+                    <strong>Daily metrics report to Slack:</strong>
+                    <div class="code-block">
+# Python example<br>
+import requests<br>
+<br>
+# Fetch metrics<br>
+metrics = requests.get(<br>
+    'https://api.github.com/orgs/YOUR_ORG/copilot/metrics',<br>
+    headers={'Authorization': 'Bearer TOKEN'}<br>
+).json()<br>
+<br>
+# Format message<br>
+message = {<br>
+    "text": f"📊 Daily Copilot Report",<br>
+    "blocks": [<br>
+        {"type": "section", "text": {<br>
+            "type": "mrkdwn",<br>
+            "text": f"*Active Users:* {metrics['total_active_users']}\n"<br>
+                   f"*Acceptance Rate:* {metrics['acceptance_rate']*100:.1f}%\n"<br>
+                   f"*Lines Accepted:* {metrics['total_lines_accepted']:,}"<br>
+        }}<br>
+    ]<br>
+}<br>
+<br>
+# Send to Slack<br>
+requests.post('https://hooks.slack.com/...', json=message)
+                    </div>
+                    <strong>Use cases:</strong>
+                    <ul>
+                        <li>Daily/weekly usage summaries</li>
+                        <li>Alerts for low adoption rates</li>
+                        <li>Celebration of milestones (e.g., 1M lines accepted)</li>
+                        <li>Team-specific performance reports</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">What programming languages have official SDK support for Copilot API?</div>
+                <div class="answer">
+                    <strong>Official SDKs:</strong>
+                    <ul>
+                        <li><strong>Octokit (JavaScript/TypeScript):</strong> Official GitHub SDK</li>
+                        <li><strong>PyGithub (Python):</strong> Community-maintained, widely used</li>
+                        <li><strong>Octokit.NET (C#):</strong> Official .NET SDK</li>
+                        <li><strong>go-github (Go):</strong> Official Go SDK</li>
+                    </ul>
+                    <strong>Example with Octokit.js:</strong>
+                    <div class="code-block">
+import { Octokit } from "@octokit/rest";<br>
+<br>
+const octokit = new Octokit({ auth: 'YOUR_TOKEN' });<br>
+<br>
+const { data } = await octokit.request(<br>
+  'GET /orgs/{org}/copilot/metrics',<br>
+  { org: 'acme-corp' }<br>
+);<br>
+<br>
+console.log(data);
+                    </div>
+                    <strong>For other languages:</strong> Use HTTP client libraries (requests, axios, fetch, etc.)
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">How do you handle API versioning for Copilot endpoints?</div>
+                <div class="answer">
+                    <strong>GitHub API versioning:</strong>
+                    <ul>
+                        <li>Uses date-based versioning: <code>X-GitHub-Api-Version: 2022-11-28</code></li>
+                        <li>Always specify version header for consistency</li>
+                        <li>GitHub maintains backward compatibility</li>
+                    </ul>
+                    <strong>Best practices:</strong>
+                    <div class="code-block">
+# Always include version header<br>
+curl -H "Accept: application/vnd.github+json" \<br>
+     -H "X-GitHub-Api-Version: 2022-11-28" \<br>
+     -H "Authorization: Bearer TOKEN" \<br>
+     https://api.github.com/orgs/acme/copilot/metrics
+                    </div>
+                    <strong>When to update:</strong>
+                    <ul>
+                        <li>Monitor GitHub changelog for API updates</li>
+                        <li>Test new versions in non-production first</li>
+                        <li>Update version header when adopting new features</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">Can you filter metrics by specific date or time period?</div>
+                <div class="answer">
+                    <strong>Yes</strong>, using <code>since</code> and <code>until</code> parameters:
+                    <div class="code-block">
+# Last 7 days<br>
+GET /orgs/{org}/copilot/metrics?since=2025-11-27&until=2025-12-04<br>
+<br>
+# Specific month<br>
+GET /orgs/{org}/copilot/metrics?since=2025-11-01&until=2025-11-30<br>
+<br>
+# Last quarter<br>
+GET /orgs/{org}/copilot/metrics?since=2025-09-01&until=2025-11-30
+                    </div>
+                    <strong>Granularity:</strong> Daily metrics (no hourly breakdown currently)
+                    <br><br>
+                    <strong>Tip:</strong> For trends, fetch multiple periods and compare:
+                    <ul>
+                        <li>Month-over-month growth</li>
+                        <li>Quarter-over-quarter adoption</li>
+                        <li>Year-over-year productivity gains</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">What are common use cases for the Copilot Metrics API?</div>
+                <div class="answer">
+                    <strong>Organizational reporting:</strong>
+                    <ul>
+                        <li>Executive dashboards showing ROI</li>
+                        <li>Monthly productivity reports</li>
+                        <li>Budget justification documentation</li>
+                    </ul>
+                    <strong>Team management:</strong>
+                    <ul>
+                        <li>Compare team adoption rates</li>
+                        <li>Identify teams needing training</li>
+                        <li>Recognize high-performing teams</li>
+                    </ul>
+                    <strong>License optimization:</strong>
+                    <ul>
+                        <li>Identify inactive seats for reallocation</li>
+                        <li>Forecast future seat requirements</li>
+                        <li>Optimize costs by removing unused licenses</li>
+                    </ul>
+                    <strong>Developer experience:</strong>
+                    <ul>
+                        <li>Track feature adoption (Chat vs. Completions)</li>
+                        <li>Identify language-specific gaps</li>
+                        <li>Measure impact of training programs</li>
+                    </ul>
+                    <strong>Compliance & governance:</strong>
+                    <ul>
+                        <li>Audit AI tool usage</li>
+                        <li>Demonstrate value to stakeholders</li>
+                        <li>Support security reviews</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">How do you troubleshoot API authentication errors?</div>
+                <div class="answer">
+                    <strong>Common issues and solutions:</strong>
+                    <br><br>
+                    <strong>401 Unauthorized:</strong>
+                    <ul>
+                        <li>✅ Check token is valid: <code>curl -H "Authorization: Bearer TOKEN" https://api.github.com/user</code></li>
+                        <li>✅ Verify token hasn't expired</li>
+                        <li>✅ Ensure token has correct scopes</li>
+                    </ul>
+                    <strong>403 Forbidden:</strong>
+                    <ul>
+                        <li>✅ Verify organization has Copilot enabled</li>
+                        <li>✅ Check user has admin permissions</li>
+                        <li>✅ Confirm token has <code>copilot</code> and <code>read:org</code> scopes</li>
+                    </ul>
+                    <strong>404 Not Found:</strong>
+                    <ul>
+                        <li>✅ Verify organization name is correct</li>
+                        <li>✅ Check endpoint URL spelling</li>
+                        <li>✅ Ensure using correct API version</li>
+                    </ul>
+                    <strong>Debug command:</strong>
+                    <div class="code-block">
+curl -v -H "Authorization: Bearer TOKEN" \<br>
+  https://api.github.com/orgs/YOUR_ORG/copilot/metrics
+                    </div>
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">What are best practices for building production applications with Copilot API?</div>
+                <div class="answer">
+                    <strong>Security:</strong>
+                    <ul>
+                        <li>Store tokens in secure vaults (not in code)</li>
+                        <li>Use fine-grained tokens with minimum necessary permissions</li>
+                        <li>Rotate tokens regularly</li>
+                        <li>Log and monitor API access</li>
+                    </ul>
+                    <strong>Reliability:</strong>
+                    <ul>
+                        <li>Implement exponential backoff for retries</li>
+                        <li>Handle rate limits gracefully</li>
+                        <li>Cache responses when appropriate</li>
+                        <li>Monitor API health and response times</li>
+                    </ul>
+                    <strong>Performance:</strong>
+                    <ul>
+                        <li>Use conditional requests (ETags) to reduce bandwidth</li>
+                        <li>Implement pagination for large datasets</li>
+                        <li>Cache frequently accessed data</li>
+                        <li>Use async/concurrent requests where possible</li>
+                    </ul>
+                    <strong>Maintainability:</strong>
+                    <ul>
+                        <li>Use official SDKs (Octokit) when available</li>
+                        <li>Document API integration points</li>
+                        <li>Write comprehensive error handling</li>
+                        <li>Create reusable API client modules</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>GitHub Copilot Q&A - Topic 4 of 11 | © 2025</p>
+        </footer>
+    </div>
+
+    <script>
+        document.querySelectorAll('.question').forEach(question => {
+            question.addEventListener('click', function() {
+                const answer = this.nextElementSibling;
+                answer.style.display = answer.style.display === 'none' ? 'block' : 'none';
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💰 Topic 11: Plans, Billing & Licensing - GitHub Copilot Q&A</title>
+    <style>
+        * {margin: 0; padding: 0; box-sizing: border-box;}
+        body {font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background: #f5f7fa; padding: 20px;}
+        .container {max-width: 1000px; margin: 0 auto; background: white; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); overflow: hidden;}
+        header {background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px;}
+        header h1 {font-size: 2em; margin-bottom: 10px;}
+        .completion-badge {background: #10b981; color: white; padding: 10px 20px; border-radius: 25px; display: inline-block; margin-top: 10px; font-weight: bold;}
+        .nav-links {padding: 15px 30px; background: #f8f9fa; border-bottom: 2px solid #e9ecef;}
+        .nav-links a {color: #667eea; text-decoration: none; margin-right: 20px; font-weight: 500;}
+        .nav-links a:hover {text-decoration: underline;}
+        .content {padding: 40px;}
+        .qa-item {margin-bottom: 30px; border-left: 4px solid #667eea; padding-left: 20px;}
+        .question {font-weight: 600; font-size: 1.1em; color: #2d3748; margin-bottom: 10px; cursor: pointer; display: flex; align-items: center; gap: 10px;}
+        .question::before {content: 'Q'; background: #667eea; color: white; width: 30px; height: 30px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0;}
+        .answer {margin-left: 40px; padding: 15px; background: #f8f9fa; border-radius: 8px; margin-top: 10px;}
+        .answer::before {content: 'A: '; font-weight: bold; color: #667eea;}
+        .answer ul, .answer ol {margin-left: 20px; margin-top: 10px;}
+        .answer li {margin-bottom: 5px;}
+        .code-block {background: #2d3748; color: #68d391; padding: 15px; border-radius: 5px; margin: 10px 0; overflow-x: auto; font-family: 'Courier New', monospace; font-size: 0.85em; line-height: 1.4;}
+        .highlight {background: #fef3c7; padding: 2px 6px; border-radius: 3px; font-weight: 500;}
+        .info-box {background: #dbeafe; border-left: 4px solid #3b82f6; padding: 15px; margin: 10px 0; border-radius: 5px;}
+        .warning-box {background: #fef3c7; border-left: 4px solid #f59e0b; padding: 15px; margin: 10px 0; border-radius: 5px;}
+        .success-box {background: #d1fae5; border-left: 4px solid #10b981; padding: 15px; margin: 10px 0; border-radius: 5px;}
+        footer {background: #2d3748; color: white; text-align: center; padding: 20px;}
+        
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            body {padding: 10px;}
+            header {padding: 20px 15px;}
+            header h1 {font-size: 1.6em;}
+            header p {font-size: 0.95em;}
+            .completion-badge {padding: 8px 15px; font-size: 0.9em;}
+            .nav-links {padding: 10px 15px; flex-wrap: wrap;}
+            .nav-links a {margin-right: 10px; margin-bottom: 5px; font-size: 0.9em;}
+            .content {padding: 20px;}
+            .qa-item {padding-left: 10px; border-left-width: 3px;}
+            .question {font-size: 1em;}
+            .question::before {width: 25px; height: 25px; font-size: 0.9em;}
+            .answer {margin-left: 30px; padding: 12px; font-size: 0.95em;}
+            .code-block {font-size: 0.8em; padding: 12px; overflow-x: auto;}
+            footer {padding: 15px; font-size: 0.9em;}
+        }
+        
+        @media (max-width: 480px) {
+            header h1 {font-size: 1.4em;}
+            .content {padding: 15px;}
+            .answer {margin-left: 20px; padding: 10px;}
+            .answer ul, .answer ol {margin-left: 15px;}
+        }
+        
+        @media print {body {background: white;} .nav-links {display: none;} .qa-item {page-break-inside: avoid;}}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>💰 Topic 11: Plans, Billing & Licensing</h1>
+            <p>25 Comprehensive Questions & Answers - FINAL TOPIC!</p>
+            <div class="completion-badge">🎉 FINAL TOPIC - 300/300 Q&A COMPLETE!</div>
+        </header>
+
+        <div class="nav-links">
+            <a href="index.html">← Back to Hub</a>
+            <a href="10-security-privacy.html">← Previous</a>
+            
+        </div>
+
+        <div class="content">
+            <div class="qa-item">
+                <div class="question">What are the different GitHub Copilot plans available?</div>
+                <div class="answer">
+                    
+                    <strong>GitHub Copilot plans (as of 2025):</strong>
+                    <ol>
+                        <li><strong>Copilot Individual:</strong>
+                            <ul>
+                                <li>$10/month or $100/year</li>
+                                <li>For individual developers</li>
+                                <li>Access to Copilot in IDEs, CLI, mobile</li>
+                                <li>Monthly or annual billing</li>
+                            </ul>
+                        </li>
+                        <li><strong>Copilot Business:</strong>
+                            <ul>
+                                <li>$19/user/month (billed annually) or $21/user/month (monthly billing)</li>
+                                <li>For organizations</li>
+                                <li>Organization-wide policy management</li>
+                                <li>Content exclusions</li>
+                                <li>Audit logs</li>
+                                <li>Minimum 1 seat, no maximum</li>
+                            </ul>
+                        </li>
+                        <li><strong>Copilot Enterprise:</strong>
+                            <ul>
+                                <li>$39/user/month</li>
+                                <li>All Business features plus:</li>
+                                <li>Personalized models (fine-tuned on your code)</li>
+                                <li>Documentation search</li>
+                                <li>Pull request summaries</li>
+                                <li>Advanced security & compliance</li>
+                            </ul>
+                        </li>
+                    </ol>
+                    <strong>Free access:</strong> Students, teachers, open source maintainers (verified)
+        
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">How does billing work for Copilot Business?</div>
+                <div class="answer">
+                    
+                    <strong>Business billing details:</strong>
+                    <ul>
+                        <li><strong>Pricing structure:</strong>
+                            <ul>
+                                <li>Per-seat pricing: $19/user/month (annual) or $21/user/month (monthly)</li>
+                                <li>Charged per assigned seat, not total organization members</li>
+                            </ul>
+                        </li>
+                        <li><strong>Billing cycle:</strong>
+                            <ul>
+                                <li>Monthly: Billed on the same day each month</li>
+                                <li>Annual: Billed once per year, upfront</li>
+                            </ul>
+                        </li>
+                        <li><strong>Proration:</strong>
+                            <ul>
+                                <li>Adding seats mid-cycle: Prorated charge for remainder of billing period</li>
+                                <li>Removing seats: Credit applied to next billing cycle</li>
+                            </ul>
+                        </li>
+                        <li><strong>Payment methods:</strong>
+                            <ul>
+                                <li>Credit card</li>
+                                <li>Invoice (for larger organizations)</li>
+                                <li>Purchase order (Enterprise)</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <strong>Example:</strong> 50 seats × $19/month = $950/month (annual billing) or $1,050/month (monthly billing)
+        
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">How do I add or remove seats in Copilot Business?</div>
+                <div class="answer">
+                    
+                    <strong>Seat management process:</strong>
+                    <ol>
+                        <li><strong>Adding seats:</strong>
+                            <div class="code-block">
+GitHub.com → Organization → Settings → Copilot<br>
+→ Access management → Grant access → Select users/teams
+                            </div>
+                            <ul>
+                                <li>Select individual users or entire teams</li>
+                                <li>Users immediately gain access</li>
+                                <li>Prorated charge applied to next invoice</li>
+                            </ul>
+                        </li>
+                        <li><strong>Removing seats:</strong>
+                            <div class="code-block">
+Settings → Copilot → Access management<br>
+→ Select users → Revoke access
+                            </div>
+                            <ul>
+                                <li>Access removed immediately</li>
+                                <li>Credit for unused time on next bill</li>
+                            </ul>
+                        </li>
+                    </ol>
+                    <strong>Best practices:</strong>
+                    <ul>
+                        <li>Audit seat assignments regularly</li>
+                        <li>Remove seats for inactive users</li>
+                        <li>Assign seats based on developer roles (not all employees)</li>
+                    </ul>
+        
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">Is there a discount for annual billing?</div>
+                <div class="answer">
+                    
+                    <strong>Annual vs. monthly billing comparison:</strong>
+                    <br><br>
+                    <strong>Individual plan:</strong>
+                    <ul>
+                        <li>Monthly: $10/month × 12 = $120/year</li>
+                        <li>Annual: $100/year</li>
+                        <li><strong>Savings: $20/year (17%)</strong></li>
+                    </ul>
+                    <strong>Business plan:</strong>
+                    <ul>
+                        <li>Monthly: $21/user/month</li>
+                        <li>Annual: $19/user/month</li>
+                        <li><strong>Savings: $24/user/year (10%)</strong></li>
+                    </ul>
+                    <strong>Example for 100 users (Business):</strong>
+                    <ul>
+                        <li>Monthly: $21 × 100 × 12 = $25,200/year</li>
+                        <li>Annual: $19 × 100 × 12 = $22,800/year</li>
+                        <li><strong>Savings: $2,400/year</strong></li>
+                    </ul>
+                    <div class="success-box">
+                        <strong>Recommendation:</strong> Annual billing offers significant savings for organizations
+                    </div>
+        
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">Can I try GitHub Copilot for free?</div>
+                <div class="answer">
+                    
+                    <strong>Free trial availability:</strong>
+                    <br><br>
+                    <strong>Individual:</strong>
+                    <ul>
+                        <li>Typically offers a 30-day free trial (check current promotions)</li>
+                        <li>No credit card required initially</li>
+                        <li>Full feature access during trial</li>
+                    </ul>
+                    <strong>Business/Enterprise:</strong>
+                    <ul>
+                        <li>Trial periods available upon request</li>
+                        <li>Contact GitHub Sales for enterprise trials</li>
+                        <li>Duration negotiable (typically 30-60 days)</li>
+                    </ul>
+                    <strong>Always free for:</strong>
+                    <ul>
+                        <li>Verified students (GitHub Education)</li>
+                        <li>Teachers and educators</li>
+                        <li>Maintainers of popular open source projects</li>
+                    </ul>
+                    <strong>To start trial:</strong>
+                    <div class="code-block">
+GitHub.com → Settings → Copilot → Start Free Trial
+                    </div>
+                    <div class="info-box">
+                        <strong>Note:</strong> Free trial terms may change. Check GitHub's website for current offers.
+                    </div>
+        
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">How do I access my invoices for Copilot?</div>
+                <div class="answer">
+                    
+                    <strong>Accessing invoices:</strong>
+                    <ol>
+                        <li><strong>Individual plan:</strong>
+                            <div class="code-block">
+GitHub.com → Settings → Billing and plans<br>
+→ Payment information → View invoices
+                            </div>
+                        </li>
+                        <li><strong>Organization (Business/Enterprise):</strong>
+                            <div class="code-block">
+GitHub.com → Organization → Settings<br>
+→ Billing and plans → Payment history
+                            </div>
+                        </li>
+                    </ol>
+                    <strong>Invoice details include:</strong>
+                    <ul>
+                        <li>Billing period</li>
+                        <li>Number of seats</li>
+                        <li>Per-seat cost</li>
+                        <li>Total amount</li>
+                        <li>Payment method</li>
+                        <li>PDF download option</li>
+                    </ul>
+                    <strong>For accounting:</strong> Invoices can be downloaded as PDFs for expense tracking and reimbursement
+        
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">What happens if I cancel my Copilot subscription?</div>
+                <div class="answer">
+                    
+                    <strong>Cancellation process and effects:</strong>
+                    <ul>
+                        <li><strong>Access:</strong>
+                            <ul>
+                                <li>Copilot access continues until end of current billing period</li>
+                                <li>No prorated refund for unused time (monthly billing)</li>
+                                <li>Annual: Access until subscription end date</li>
+                            </ul>
+                        </li>
+                        <li><strong>Data:</strong>
+                            <ul>
+                                <li>No data loss from repositories</li>
+                                <li>Telemetry data retained per data retention policy</li>
+                                <li>Can request data deletion per GDPR</li>
+                            </ul>
+                        </li>
+                        <li><strong>Reactivation:</strong>
+                            <ul>
+                                <li>Can resubscribe at any time</li>
+                                <li>No penalty for canceling and rejoining</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <strong>How to cancel:</strong>
+                    <div class="code-block">
+Settings → Billing and plans → Copilot<br>
+→ Cancel subscription → Confirm
+                    </div>
+        
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">Are there volume discounts for large organizations?</div>
+                <div class="answer">
+                    
+                    <strong>Volume pricing options:</strong>
+                    <br><br>
+                    <strong>Standard pricing:</strong> Published rates apply for most customers
+                    <br><br>
+                    <strong>Enterprise discounts:</strong>
+                    <ul>
+                        <li>Available for large deployments (typically 500+ seats)</li>
+                        <li>Custom pricing negotiated with GitHub Sales</li>
+                        <li>Factors considered:
+                            <ul>
+                                <li>Total seat count</li>
+                                <li>Commitment length (multi-year)</li>
+                                <li>Existing GitHub Enterprise relationship</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <strong>Enterprise Agreements:</strong>
+                    <ul>
+                        <li>Multi-year contracts</li>
+                        <li>Bundled with other GitHub products</li>
+                        <li>Dedicated support and onboarding</li>
+                    </ul>
+                    <strong>To inquire:</strong> Contact GitHub Sales at https://github.com/enterprise/contact
+        
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">What's the difference between Business and Enterprise pricing?</div>
+                <div class="answer">
+                    
+                    <strong>Pricing comparison:</strong>
+                    <br><br>
+                    <table style="width:100%; border-collapse: collapse; margin-top: 10px;">
+                        <tr style="background: #667eea; color: white;">
+                            <th style="padding: 10px; text-align: left;">Feature</th>
+                            <th style="padding: 10px;">Business</th>
+                            <th style="padding: 10px;">Enterprise</th>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border-bottom: 1px solid #ddd;">Price</td>
+                            <td style="padding: 10px; border-bottom: 1px solid #ddd;">$19-21/user/mo</td>
+                            <td style="padding: 10px; border-bottom: 1px solid #ddd;">$39/user/mo</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border-bottom: 1px solid #ddd;">IDE support</td>
+                            <td style="padding: 10px; border-bottom: 1px solid #ddd;">✅</td>
+                            <td style="padding: 10px; border-bottom: 1px solid #ddd;">✅</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border-bottom: 1px solid #ddd;">Content exclusions</td>
+                            <td style="padding: 10px; border-bottom: 1px solid #ddd;">✅</td>
+                            <td style="padding: 10px; border-bottom: 1px solid #ddd;">✅</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border-bottom: 1px solid #ddd;">Personalized models</td>
+                            <td style="padding: 10px; border-bottom: 1px solid #ddd;">❌</td>
+                            <td style="padding: 10px; border-bottom: 1px solid #ddd;">✅</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border-bottom: 1px solid #ddd;">Documentation search</td>
+                            <td style="padding: 10px; border-bottom: 1px solid #ddd;">❌</td>
+                            <td style="padding: 10px; border-bottom: 1px solid #ddd;">✅</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border-bottom: 1px solid #ddd;">PR summaries</td>
+                            <td style="padding: 10px; border-bottom: 1px solid #ddd;">❌</td>
+                            <td style="padding: 10px; border-bottom: 1px solid #ddd;">✅</td>
+                        </tr>
+                    </table>
+                    <br>
+                    <strong>Enterprise is worth it if:</strong>
+                    <ul>
+                        <li>Need personalized AI models for proprietary code</li>
+                        <li>Want enhanced documentation capabilities</li>
+                        <li>Require advanced compliance features</li>
+                    </ul>
+        
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">How does licensing work for contractors and external collaborators?</div>
+                <div class="answer">
+                    
+                    <strong>Contractor licensing considerations:</strong>
+                    <ul>
+                        <li><strong>Organization seats:</strong>
+                            <ul>
+                                <li>Contractors can be assigned Copilot seats</li>
+                                <li>Same cost as full-time employees ($19-21/month Business)</li>
+                                <li>Admin assigns via organization settings</li>
+                            </ul>
+                        </li>
+                        <li><strong>Individual licenses:</strong>
+                            <ul>
+                                <li>Contractors can use their own Individual subscriptions</li>
+                                <li>Organization not billed</li>
+                                <li>Contractor manages their own license</li>
+                            </ul>
+                        </li>
+                        <li><strong>Short-term contractors:</strong>
+                            <ul>
+                                <li>Assign seat temporarily</li>
+                                <li>Revoke access when contract ends</li>
+                                <li>Prorated billing for partial months</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <strong>Best practice:</strong> Define policy in contractor agreements (who provides license)
+        
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">Can I transfer my Individual subscription to a Business plan?</div>
+                <div class="answer">
+                    
+                    <strong>Subscription migration:</strong>
+                    <br><br>
+                    <strong>Individual → Business:</strong>
+                    <ul>
+                        <li>Join organization with Copilot Business</li>
+                        <li>Organization admin assigns you a seat</li>
+                        <li>Your Individual subscription can be canceled</li>
+                        <li>No automatic migration - manual process</li>
+                    </ul>
+                    <strong>Billing implications:</strong>
+                    <ul>
+                        <li>Cancel Individual plan to avoid double billing</li>
+                        <li>No refund for unused Individual subscription time</li>
+                        <li>Organization billed for your Business seat</li>
+                    </ul>
+                    <strong>Steps:</strong>
+                    <ol>
+                        <li>Request Business seat from organization admin</li>
+                        <li>Admin grants access</li>
+                        <li>Cancel Individual subscription</li>
+                        <li>Continue using Copilot via organization</li>
+                    </ol>
+        
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">What payment methods are accepted for Copilot subscriptions?</div>
+                <div class="answer">
+                    
+                    <strong>Payment options by plan:</strong>
+                    <ul>
+                        <li><strong>Individual:</strong>
+                            <ul>
+                                <li>Credit card (Visa, Mastercard, Amex, Discover)</li>
+                                <li>Debit card</li>
+                                <li>PayPal (in some regions)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Business (small orgs):</strong>
+                            <ul>
+                                <li>Credit card</li>
+                                <li>Automatic billing on file</li>
+                            </ul>
+                        </li>
+                        <li><strong>Business/Enterprise (larger orgs):</strong>
+                            <ul>
+                                <li>Invoice billing</li>
+                                <li>Purchase orders</li>
+                                <li>Wire transfer</li>
+                                <li>ACH (US)</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <strong>Updating payment method:</strong>
+                    <div class="code-block">
+Settings → Billing and plans → Payment information<br>
+→ Edit payment method
+                    </div>
+                    <strong>Failed payments:</strong> Grace period provided, then service suspended until payment resolved
+        
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">How is Copilot usage tracked for billing purposes?</div>
+                <div class="answer">
+                    
+                    <strong>Usage tracking mechanisms:</strong>
+                    <ul>
+                        <li><strong>Seat-based billing:</strong>
+                            <ul>
+                                <li>Charged per assigned seat, not actual usage</li>
+                                <li>Doesn't matter if user uses Copilot 1 hour or 100 hours</li>
+                                <li>Fixed cost per seat</li>
+                            </ul>
+                        </li>
+                        <li><strong>No usage-based billing:</strong>
+                            <ul>
+                                <li>Unlike some AI services, no per-request charges</li>
+                                <li>Unlimited suggestions within subscription</li>
+                            </ul>
+                        </li>
+                        <li><strong>Seat assignment tracking:</strong>
+                            <ul>
+                                <li>Organization admins can see assigned users</li>
+                                <li>Audit logs track seat grants/revocations</li>
+                                <li>Billing portal shows seat count</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <strong>Visibility:</strong> Admins can view seat assignments but not individual developer usage metrics (privacy)
+        
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">Are there academic or nonprofit discounts for GitHub Copilot?</div>
+                <div class="answer">
+                    
+                    <strong>Special pricing programs:</strong>
+                    <ol>
+                        <li><strong>GitHub Education (Students/Teachers):</strong>
+                            <ul>
+                                <li><strong>FREE</strong> Copilot Individual access</li>
+                                <li>Verify student/teacher status via GitHub Education</li>
+                                <li>Includes all Individual features</li>
+                            </ul>
+                        </li>
+                        <li><strong>Open Source Maintainers:</strong>
+                            <ul>
+                                <li>FREE access for verified open source contributors</li>
+                                <li>Must maintain popular open source projects</li>
+                                <li>Application required</li>
+                            </ul>
+                        </li>
+                        <li><strong>Nonprofits:</strong>
+                            <ul>
+                                <li>Contact GitHub Sales for nonprofit pricing</li>
+                                <li>Discounts available on case-by-case basis</li>
+                                <li>May require 501(c)(3) or equivalent status</li>
+                            </ul>
+                        </li>
+                    </ol>
+                    <strong>How to apply:</strong>
+                    <ul>
+                        <li>Students/Teachers: https://education.github.com/</li>
+                        <li>Open Source: Check Copilot settings for eligibility</li>
+                        <li>Nonprofits: Contact GitHub Sales</li>
+                    </ul>
+        
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">What happens to billing when I change my organization size?</div>
+                <div class="answer">
+                    
+                    <strong>Billing adjustments for size changes:</strong>
+                    <br><br>
+                    <strong>Adding seats (scaling up):</strong>
+                    <ul>
+                        <li>Prorated charge for remainder of billing cycle</li>
+                        <li>Example: Add 10 seats mid-month, pay ~$95 (half of $190 for 10 seats)</li>
+                        <li>Next cycle: Full charge for all seats</li>
+                    </ul>
+                    <strong>Removing seats (scaling down):</strong>
+                    <ul>
+                        <li>Credit applied to next billing cycle</li>
+                        <li>Unused time calculated proportionally</li>
+                        <li>No immediate refund; offset future invoices</li>
+                    </ul>
+                    <strong>Large-scale changes:</strong>
+                    <ul>
+                        <li>Growing from 50 to 500 seats: Consider contacting Sales for better pricing</li>
+                        <li>Downsizing significantly: Review contract terms (annual commitments)</li>
+                    </ul>
+                    <div class="info-box">
+                        <strong>Tip:</strong> Make seat adjustments early in billing cycle to minimize proration complexity
+                    </div>
+        
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">Can I get a refund if I'm not satisfied with GitHub Copilot?</div>
+                <div class="answer">
+                    
+                    <strong>Refund policy:</strong>
+                    <br><br>
+                    <strong>General stance:</strong> GitHub typically does not offer refunds for subscription services
+                    <br><br>
+                    <strong>Exceptions:</strong>
+                    <ul>
+                        <li><strong>Billing errors:</strong> Charged incorrectly, duplicate charges</li>
+                        <li><strong>Technical issues:</strong> Service unavailable for extended period</li>
+                        <li><strong>Fraud:</strong> Unauthorized charges</li>
+                    </ul>
+                    <strong>Best approach:</strong>
+                    <ul>
+                        <li>Use free trial before committing</li>
+                        <li>Start with monthly billing (more flexibility)</li>
+                        <li>Contact support for extenuating circumstances</li>
+                    </ul>
+                    <strong>Cancellation:</strong>
+                    <ul>
+                        <li>Can cancel anytime</li>
+                        <li>Access continues until end of billing period</li>
+                        <li>No refund for unused time (standard policy)</li>
+                    </ul>
+                    <div class="warning-box">
+                        <strong>Note:</strong> Always review Terms of Service for official refund policy
+                    </div>
+        
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">How do renewals work for annual subscriptions?</div>
+                <div class="answer">
+                    
+                    <strong>Annual subscription renewal process:</strong>
+                    <ul>
+                        <li><strong>Automatic renewal:</strong>
+                            <ul>
+                                <li>Subscriptions auto-renew by default</li>
+                                <li>Charged on anniversary of purchase date</li>
+                                <li>Same payment method used</li>
+                            </ul>
+                        </li>
+                        <li><strong>Renewal notifications:</strong>
+                            <ul>
+                                <li>Email reminder ~30 days before renewal</li>
+                                <li>Includes current pricing (may change)</li>
+                                <li>Option to cancel before renewal</li>
+                            </ul>
+                        </li>
+                        <li><strong>Price changes:</strong>
+                            <ul>
+                                <li>GitHub may update pricing year-over-year</li>
+                                <li>Notified of new price before renewal</li>
+                                <li>Can cancel to avoid price increase</li>
+                            </ul>
+                        </li>
+                        <li><strong>Preventing auto-renewal:</strong>
+                            <ul>
+                                <li>Cancel subscription before anniversary date</li>
+                                <li>Access continues until subscription end</li>
+                            </ul>
+                        </li>
+                    </ul>
+        
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">What are the billing implications of using Copilot in multiple IDEs?</div>
+                <div class="answer">
+                    
+                    <strong>Multi-IDE usage and billing:</strong>
+                    <br><br>
+                    <strong>Single subscription covers all IDEs:</strong>
+                    <ul>
+                        <li>One Copilot subscription = access in all supported IDEs</li>
+                        <li>VS Code, Visual Studio, JetBrains, Neovim, etc.</li>
+                        <li>No additional charge per IDE</li>
+                    </ul>
+                    <strong>Simultaneous usage:</strong>
+                    <ul>
+                        <li>Can use in multiple IDEs at once</li>
+                        <li>Same account across devices</li>
+                        <li>No device limit</li>
+                    </ul>
+                    <strong>Billing consideration:</strong>
+                    <ul>
+                        <li>Charged per user, not per IDE or device</li>
+                        <li>Example: 1 developer using Copilot in VS Code + JetBrains = 1 seat</li>
+                    </ul>
+                    <div class="success-box">
+                        <strong>Benefit:</strong> Freedom to switch IDEs without additional licensing concerns
+                    </div>
+        
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">How can I estimate Total Cost of Ownership (TCO) for Copilot?</div>
+                <div class="answer">
+                    
+                    <strong>TCO calculation framework:</strong>
+                    <ol>
+                        <li><strong>Direct costs:</strong>
+                            <ul>
+                                <li>Subscription fees: $19/user/month × [# developers] × 12 months</li>
+                                <li>Example: 50 developers = $11,400/year</li>
+                            </ul>
+                        </li>
+                        <li><strong>Implementation costs:</strong>
+                            <ul>
+                                <li>Setup time: Minimal (hours, not weeks)</li>
+                                <li>Training: ~2-4 hours per developer</li>
+                                <li>Integration: Configuration, policy setup</li>
+                            </ul>
+                        </li>
+                        <li><strong>Ongoing costs:</strong>
+                            <ul>
+                                <li>Administration: Seat management, policy updates (~2-5 hours/month)</li>
+                                <li>Monitoring: Usage tracking, audit reviews</li>
+                            </ul>
+                        </li>
+                        <li><strong>Productivity gains (offset):</strong>
+                            <ul>
+                                <li>Time savings: 20-40% faster code completion (varies)</li>
+                                <li>Reduced context switching</li>
+                                <li>Faster onboarding of new developers</li>
+                            </ul>
+                        </li>
+                    </ol>
+                    <strong>Example TCO (50 developers, 1 year):</strong>
+                    <ul>
+                        <li>Subscriptions: $11,400</li>
+                        <li>Training: $5,000 (assuming 2 hours × $50/hour × 50 devs)</li>
+                        <li>Admin: $1,200/year</li>
+                        <li><strong>Total: ~$17,600/year</strong></li>
+                        <li><strong>Per developer: $352/year or $29/month</strong></li>
+                    </ul>
+        
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">Are there any hidden fees or additional charges with Copilot?</div>
+                <div class="answer">
+                    
+                    <strong>Fee transparency:</strong>
+                    <br><br>
+                    <strong>No hidden fees:</strong> GitHub Copilot has straightforward per-seat pricing
+                    <br><br>
+                    <strong>What's included in the price:</strong>
+                    <ul>
+                        <li>Unlimited code suggestions</li>
+                        <li>All supported IDEs and editors</li>
+                        <li>CLI access</li>
+                        <li>Mobile app (where available)</li>
+                        <li>Updates and new features</li>
+                        <li>Support (level depends on plan)</li>
+                    </ul>
+                    <strong>Potential additional costs (NOT Copilot-specific):</strong>
+                    <ul>
+                        <li>GitHub Enterprise subscription (separate product)</li>
+                        <li>Advanced Security features (separate add-on)</li>
+                        <li>Actions minutes or storage (if exceeded)</li>
+                    </ul>
+                    <strong>No charges for:</strong>
+                    <ul>
+                        <li>Number of suggestions generated</li>
+                        <li>API calls</li>
+                        <li>Data transfer/bandwidth</li>
+                        <li>Number of repositories</li>
+                    </ul>
+        
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">How do I manage Copilot licenses across multiple organizations?</div>
+                <div class="answer">
+                    
+                    <strong>Multi-organization license management:</strong>
+                    <br><br>
+                    <strong>Scenario:</strong> User belongs to multiple GitHub organizations
+                    <br><br>
+                    <strong>Licensing approach:</strong>
+                    <ul>
+                        <li><strong>Separate licenses per org:</strong>
+                            <ul>
+                                <li>Each organization manages its own Copilot subscriptions</li>
+                                <li>User can have access via multiple orgs</li>
+                                <li>Each org bills for seats they assign</li>
+                            </ul>
+                        </li>
+                        <li><strong>Individual subscription:</strong>
+                            <ul>
+                                <li>User maintains their own Individual subscription</li>
+                                <li>Works across all organizations they belong to</li>
+                                <li>User pays, not organizations</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <strong>Management complexity:</strong>
+                    <ul>
+                        <li>Each org admin manages seats independently</li>
+                        <li>No centralized cross-org license management (by design)</li>
+                        <li>Users can switch which org's license they use</li>
+                    </ul>
+                    <strong>Best practice:</strong> Clarify which org provides Copilot for shared users
+        
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">What should I consider when budgeting for Copilot at scale?</div>
+                <div class="answer">
+                    
+                    <strong>Budgeting considerations for large deployments:</strong>
+                    <ol>
+                        <li><strong>Initial rollout:</strong>
+                            <ul>
+                                <li>Start with pilot group (10-20 developers)</li>
+                                <li>Measure productivity impact</li>
+                                <li>Budget for pilot: $2,000-5,000 for 3 months</li>
+                            </ul>
+                        </li>
+                        <li><strong>Scaling costs:</strong>
+                            <ul>
+                                <li>Calculate: [# developers] × $19/month × 12 = annual cost</li>
+                                <li>Example: 500 developers = $114,000/year</li>
+                                <li>Negotiate volume discounts if over 500 seats</li>
+                            </ul>
+                        </li>
+                        <li><strong>Growth buffer:</strong>
+                            <ul>
+                                <li>Budget for 10-15% more seats than current headcount</li>
+                                <li>Accounts for new hires, contractors</li>
+                            </ul>
+                        </li>
+                        <li><strong>Ancillary costs:</strong>
+                            <ul>
+                                <li>Training materials: $5-10/developer</li>
+                                <li>Admin time: ~5 hours/month</li>
+                                <li>Security/compliance review: One-time cost (varies)</li>
+                            </ul>
+                        </li>
+                        <li><strong>ROI tracking:</strong>
+                            <ul>
+                                <li>Measure time savings, code quality, developer satisfaction</li>
+                                <li>Quantify productivity gains to justify budget</li>
+                            </ul>
+                        </li>
+                    </ol>
+                    <strong>Budget approval tips:</strong>
+                    <ul>
+                        <li>Frame as productivity investment, not just tooling cost</li>
+                        <li>Show pilot results and projected ROI</li>
+                        <li>Compare to cost of hiring additional developers</li>
+                    </ul>
+        
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">How can I optimize Copilot spending for my organization?</div>
+                <div class="answer">
+                    
+                    <strong>Cost optimization strategies:</strong>
+                    <ul>
+                        <li><strong>Seat allocation:</strong>
+                            <ul>
+                                <li>Only assign seats to active developers (not all employees)</li>
+                                <li>Prioritize engineers who write code daily</li>
+                                <li>Regularly audit and remove inactive users</li>
+                            </ul>
+                        </li>
+                        <li><strong>Billing plan selection:</strong>
+                            <ul>
+                                <li>Choose annual billing for 10% discount</li>
+                                <li>Start with Business, upgrade to Enterprise only if needed</li>
+                            </ul>
+                        </li>
+                        <li><strong>Pilot programs:</strong>
+                            <ul>
+                                <li>Prove value before full rollout</li>
+                                <li>Expand based on ROI data</li>
+                            </ul>
+                        </li>
+                        <li><strong>Volume negotiations:</strong>
+                            <ul>
+                                <li>For 500+ seats, negotiate custom pricing</li>
+                                <li>Bundle with other GitHub services for better rates</li>
+                            </ul>
+                        </li>
+                        <li><strong>Contractor management:</strong>
+                            <ul>
+                                <li>Assign seats to long-term contractors only</li>
+                                <li>Short-term: Require contractors to use own licenses</li>
+                            </ul>
+                        </li>
+                        <li><strong>Usage tracking:</strong>
+                            <ul>
+                                <li>Monitor seat utilization (who's actually using it)</li>
+                                <li>Reallocate unused seats</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <strong>Example savings:</strong> Auditing 100 seats, removing 10 inactive = $2,280/year saved
+        
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">What are the contract terms for Enterprise subscriptions?</div>
+                <div class="answer">
+                    
+                    <strong>Enterprise contract considerations:</strong>
+                    <ul>
+                        <li><strong>Term length:</strong>
+                            <ul>
+                                <li>Typically 1-3 years</li>
+                                <li>Multi-year contracts may offer better pricing</li>
+                                <li>Minimum commitment required</li>
+                            </ul>
+                        </li>
+                        <li><strong>Pricing:</strong>
+                            <ul>
+                                <li>Custom pricing for large deployments</li>
+                                <li>Volume discounts available</li>
+                                <li>Fixed price for contract duration (price protection)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Seat flexibility:</strong>
+                            <ul>
+                                <li>True-up provisions for adding seats mid-contract</li>
+                                <li>Minimum seat commitments</li>
+                                <li>Overage charges if exceeding committed seats</li>
+                            </ul>
+                        </li>
+                        <li><strong>Support & SLAs:</strong>
+                            <ul>
+                                <li>Dedicated support channels</li>
+                                <li>Uptime guarantees (SLAs)</li>
+                                <li>Priority bug fixes and feature requests</li>
+                            </ul>
+                        </li>
+                        <li><strong>Termination:</strong>
+                            <ul>
+                                <li>Early termination fees may apply</li>
+                                <li>Notice period (typically 30-90 days)</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <strong>Negotiation tips:</strong> Work with GitHub Sales to customize terms to your organization's needs
+        
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">How does billing work for GitHub Copilot in government organizations?</div>
+                <div class="answer">
+                    
+                    <strong>Government-specific billing considerations:</strong>
+                    <ul>
+                        <li><strong>Procurement:</strong>
+                            <ul>
+                                <li>Purchase orders accepted</li>
+                                <li>Government pricing available (contact Sales)</li>
+                                <li>Contracts vehicles: GSA Schedule, SEWP</li>
+                            </ul>
+                        </li>
+                        <li><strong>Compliance:</strong>
+                            <ul>
+                                <li>FedRAMP authorization for government use (GitHub Enterprise)</li>
+                                <li>Copilot may require additional compliance review</li>
+                            </ul>
+                        </li>
+                        <li><strong>Billing cycle:</strong>
+                            <ul>
+                                <li>Annual billing typical for government contracts</li>
+                                <li>Invoicing aligned with fiscal year where possible</li>
+                            </ul>
+                        </li>
+                        <li><strong>Payment:</strong>
+                            <ul>
+                                <li>Invoice billing (not credit card)</li>
+                                <li>Net 30-60 payment terms</li>
+                                <li>Wire transfer or ACH</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <strong>Special considerations:</strong>
+                    <ul>
+                        <li>Data residency requirements</li>
+                        <li>Security certifications (ATO)</li>
+                        <li>Contract approval timelines (can be lengthy)</li>
+                    </ul>
+                    <strong>Contact:</strong> GitHub Government Sales for specialized support
+        
+                </div>
+            </div>
+
+        </div>
+
+        <footer>
+            <p>GitHub Copilot Q&A - Topic 11 of 11 | 🎊 ALL 300 Q&A COMPLETE! | © 2025</p>
+        </footer>
+    </div>
+
+    <script>
+        document.querySelectorAll('.question').forEach(question => {
+            question.addEventListener('click', function() {
+                const answer = this.nextElementSibling;
+                answer.style.display = answer.style.display === 'none' ? 'block' : 'none';
+            });
+        });
+    </script>
+</body>
+</html>

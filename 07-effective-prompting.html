@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💡 Topic 7: Effective Prompting Practices - GitHub Copilot Q&A</title>
+    <style>
+        * {margin: 0; padding: 0; box-sizing: border-box;}
+        body {font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background: #f5f7fa; padding: 20px;}
+        .container {max-width: 1000px; margin: 0 auto; background: white; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); overflow: hidden;}
+        header {background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px;}
+        header h1 {font-size: 2em; margin-bottom: 10px;}
+        .nav-links {padding: 15px 30px; background: #f8f9fa; border-bottom: 2px solid #e9ecef;}
+        .nav-links a {color: #667eea; text-decoration: none; margin-right: 20px; font-weight: 500;}
+        .nav-links a:hover {text-decoration: underline;}
+        .content {padding: 40px;}
+        .qa-item {margin-bottom: 30px; border-left: 4px solid #667eea; padding-left: 20px;}
+        .question {font-weight: 600; font-size: 1.1em; color: #2d3748; margin-bottom: 10px; cursor: pointer; display: flex; align-items: center; gap: 10px;}
+        .question::before {content: 'Q'; background: #667eea; color: white; width: 30px; height: 30px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0;}
+        .answer {margin-left: 40px; padding: 15px; background: #f8f9fa; border-radius: 8px; margin-top: 10px;}
+        .answer::before {content: 'A: '; font-weight: bold; color: #667eea;}
+        .answer ul, .answer ol {margin-left: 20px; margin-top: 10px;}
+        .answer li {margin-bottom: 5px;}
+        .code-block {background: #2d3748; color: #68d391; padding: 15px; border-radius: 5px; margin: 10px 0; overflow-x: auto; font-family: 'Courier New', monospace; font-size: 0.85em; line-height: 1.4;}
+        .highlight {background: #fef3c7; padding: 2px 6px; border-radius: 3px; font-weight: 500;}
+        .info-box {background: #dbeafe; border-left: 4px solid #3b82f6; padding: 15px; margin: 10px 0; border-radius: 5px;}
+        .warning-box {background: #fef3c7; border-left: 4px solid #f59e0b; padding: 15px; margin: 10px 0; border-radius: 5px;}
+        footer {background: #2d3748; color: white; text-align: center; padding: 20px;}
+        
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            body {padding: 10px;}
+            header {padding: 20px 15px;}
+            header h1 {font-size: 1.6em;}
+            header p {font-size: 0.95em;}
+            .nav-links {padding: 10px 15px; flex-wrap: wrap;}
+            .nav-links a {margin-right: 10px; margin-bottom: 5px; font-size: 0.9em;}
+            .content {padding: 20px;}
+            .qa-item {padding-left: 10px; border-left-width: 3px;}
+            .question {font-size: 1em;}
+            .question::before {width: 25px; height: 25px; font-size: 0.9em;}
+            .answer {margin-left: 30px; padding: 12px; font-size: 0.95em;}
+            .code-block {font-size: 0.8em; padding: 12px; overflow-x: auto;}
+            footer {padding: 15px; font-size: 0.9em;}
+        }
+        
+        @media (max-width: 480px) {
+            header h1 {font-size: 1.4em;}
+            .content {padding: 15px;}
+            .answer {margin-left: 20px; padding: 10px;}
+            .answer ul, .answer ol {margin-left: 15px;}
+        }
+        
+        @media print {body {background: white;} .nav-links {display: none;} .qa-item {page-break-inside: avoid;}}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>💡 Topic 7: Effective Prompting Practices</h1>
+            <p>30 Comprehensive Questions & Answers</p>
+        </header>
+
+        <div class="nav-links">
+            <a href="index.html">← Back to Hub</a>
+            <a href="06-usage-analytics.html">← Previous</a>
+            <a href="08-responsible-ai.html">Next Topic →</a>
+        </div>
+
+        <div class="content">
+            <div class="qa-item">
+                <div class="question">What makes an effective prompt for GitHub Copilot?</div>
+                <div class="answer">
+                    
+                    <strong>Key characteristics of effective prompts:</strong>
+                    <ul>
+                        <li><strong>Specificity:</strong> Clear, detailed descriptions of what you want</li>
+                        <li><strong>Context:</strong> Relevant information about the surrounding code</li>
+                        <li><strong>Examples:</strong> Sample inputs/outputs when applicable</li>
+                        <li><strong>Constraints:</strong> Requirements, limitations, edge cases</li>
+                        <li><strong>Natural language:</strong> Write like you're explaining to a colleague</li>
+                    </ul>
+                    <strong>Example - Bad prompt:</strong>
+                    <div class="code-block">// function</div>
+                    <strong>Example - Good prompt:</strong>
+                    <div class="code-block">
+// Function to validate email addresses<br>
+// Returns true if valid, false otherwise<br>
+// Should handle common cases like name@domain.com
+                    </div>
+        
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">How does providing context improve Copilot suggestions?</div>
+                <div class="answer">
+                    
+                    <strong>Context types that improve suggestions:</strong>
+                    <ul>
+                        <li><strong>Open related files:</strong> Copilot reads other tabs for patterns</li>
+                        <li><strong>Comments above code:</strong> Explain intent and requirements</li>
+                        <li><strong>Function signatures:</strong> Define parameters and return types</li>
+                        <li><strong>Imports/dependencies:</strong> Show libraries you're using</li>
+                        <li><strong>Variable names:</strong> Use descriptive, meaningful names</li>
+                    </ul>
+                    <strong>Example with context:</strong>
+                    <div class="code-block">
+import { User, Payment } from './types';<br>
+<br>
+// Calculate total revenue for a user<br>
+// Sum all completed payments from their order history<br>
+// Return 0 if user has no payments<br>
+function calculateUserRevenue(user: User): number {
+                    </div>
+                    <strong>Result:</strong> Copilot understands data structures and business logic
+        
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">What is the 'Show, Don't Tell' principle for prompting Copilot?</div>
+                <div class="answer">
+                    
+                    <strong>"Show, Don't Tell" means:</strong> Provide examples instead of abstract descriptions
+                    <br><br>
+                    <strong>Less effective (telling):</strong>
+                    <div class="code-block">// Parse date strings into objects</div>
+                    <strong>More effective (showing):</strong>
+                    <div class="code-block">
+// Parse date strings like "2024-01-15" into Date objects<br>
+// Example: "2024-01-15" → new Date(2024, 0, 15)<br>
+// Handle invalid formats by returning null
+                    </div>
+                    <strong>Benefits:</strong>
+                    <ul>
+                        <li>Copilot sees concrete examples</li>
+                        <li>Less ambiguity in requirements</li>
+                        <li>Better handling of edge cases</li>
+                        <li>More accurate code generation</li>
+                    </ul>
+        
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">How should you structure comments to guide Copilot?</div>
+                <div class="answer">
+                    
+                    <strong>Effective comment structure:</strong>
+                    <ol>
+                        <li><strong>High-level purpose:</strong> What the function does</li>
+                        <li><strong>Parameters:</strong> Describe each input</li>
+                        <li><strong>Return value:</strong> What it returns and when</li>
+                        <li><strong>Examples:</strong> Sample inputs and expected outputs</li>
+                        <li><strong>Edge cases:</strong> Special conditions to handle</li>
+                    </ol>
+                    <strong>Example structure:</strong>
+                    <div class="code-block">
+/**<br>
+ * Calculate compound interest for an investment<br>
+ * @param principal - Initial amount invested<br>
+ * @param rate - Annual interest rate (as decimal, e.g., 0.05 for 5%)<br>
+ * @param years - Number of years to compound<br>
+ * @param frequency - Compounds per year (e.g., 12 for monthly)<br>
+ * @returns Final amount after compounding<br>
+ * @example calculateCompoundInterest(1000, 0.05, 10, 12) → 1647.01<br>
+ */<br>
+function calculateCompoundInterest(
+                    </div>
+        
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">What is prompt chaining and how does it help?</div>
+                <div class="answer">
+                    
+                    <strong>Prompt Chaining:</strong> Breaking complex tasks into sequential smaller prompts
+                    <br><br>
+                    <strong>Instead of one large prompt:</strong>
+                    <div class="code-block">
+// Create a REST API with authentication, database CRUD, and error handling
+                    </div>
+                    <strong>Use a chain of prompts:</strong>
+                    <div class="code-block">
+Step 1: // Define TypeScript interfaces for User and AuthToken<br>
+<br>
+Step 2: // Create database connection using Prisma<br>
+<br>
+Step 3: // Implement login function that validates credentials<br>
+<br>
+Step 4: // Add error handling middleware for Express
+                    </div>
+                    <strong>Benefits:</strong>
+                    <ul>
+                        <li>More focused, accurate suggestions</li>
+                        <li>Easier to review and validate each step</li>
+                        <li>Better handling of complex logic</li>
+                        <li>Can adjust approach between steps</li>
+                    </ul>
+        
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">How do you prompt Copilot for test cases?</div>
+                <div class="answer">
+                    
+                    <strong>Effective test prompting techniques:</strong>
+                    <ol>
+                        <li><strong>Reference the function:</strong> Keep it visible in the file</li>
+                        <li><strong>Use testing framework keywords:</strong> describe, it, test, expect</li>
+                        <li><strong>List test scenarios:</strong> Normal, edge, error cases</li>
+                        <li><strong>Show expected behavior:</strong> What should happen</li>
+                    </ol>
+                    <strong>Example prompt for tests:</strong>
+                    <div class="code-block">
+// Test suite for calculateDiscount function<br>
+// Test cases:<br>
+// - 10% discount on $100 should return $90<br>
+// - 0% discount should return original price<br>
+// - 100% discount should return $0<br>
+// - Invalid negative discount should throw error<br>
+// - Invalid negative price should throw error<br>
+<br>
+describe('calculateDiscount', () => {
+                    </div>
+                    <strong>Result:</strong> Copilot generates comprehensive test suite
+        
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">What role do file names and variable names play in prompting?</div>
+                <div class="answer">
+                    
+                    <strong>Names provide implicit context:</strong>
+                    <ul>
+                        <li><strong>File names:</strong> <code>userAuthService.ts</code> → Copilot expects auth logic</li>
+                        <li><strong>Variable names:</strong> <code>emailValidator</code> → Suggests validation patterns</li>
+                        <li><strong>Function names:</strong> <code>handlePaymentSuccess</code> → Infers success scenarios</li>
+                        <li><strong>Class names:</strong> <code>DatabaseConnection</code> → Expects DB methods</li>
+                    </ul>
+                    <strong>Comparison:</strong>
+                    <div class="code-block">
+❌ Poor naming:<br>
+const fn = (d) => { // Copilot has no context<br>
+<br>
+✅ Good naming:<br>
+const calculateOrderTotal = (orderItems) => { // Clear intent
+                    </div>
+                    <strong>Impact:</strong> Better names = better suggestions without explicit prompts
+        
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">How do you prompt for specific code patterns or idioms?</div>
+                <div class="answer">
+                    
+                    <strong>Technique:</strong> Show examples of the pattern you want
+                    <br><br>
+                    <strong>Example - React Hooks pattern:</strong>
+                    <div class="code-block">
+// Custom hook for fetching user data<br>
+// Returns { data, loading, error } like other hooks in this project<br>
+// Uses fetch API and handles async states<br>
+function useUserData(userId) {
+                    </div>
+                    <strong>Example - Builder pattern:</strong>
+                    <div class="code-block">
+// QueryBuilder class using method chaining<br>
+// Example: new QueryBuilder().select('*').from('users').where('id', 5)<br>
+class QueryBuilder {
+                    </div>
+                    <strong>Tip:</strong> Reference existing patterns in your codebase that Copilot should mimic
+        
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">What is the optimal level of detail in a prompt?</div>
+                <div class="answer">
+                    
+                    <strong>Balance specificity with flexibility:</strong>
+                    <br><br>
+                    <strong>Too vague:</strong>
+                    <div class="code-block">// function that does stuff</div>
+                    <strong>Too prescriptive:</strong>
+                    <div class="code-block">
+// Use a for loop from 0 to length-1, create empty array,<br>
+// push items if condition, return array
+                    </div>
+                    <strong>Just right:</strong>
+                    <div class="code-block">
+// Filter array to only include items where price > 100<br>
+// Return new array, don't modify original
+                    </div>
+                    <strong>Rule of thumb:</strong>
+                    <ul>
+                        <li><strong>What:</strong> Detailed (what you want to achieve)</li>
+                        <li><strong>How:</strong> Flexible (let Copilot choose best approach)</li>
+                        <li><strong>Why:</strong> Optional (helps with context)</li>
+                    </ul>
+        
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">How do you prompt Copilot when working with external APIs?</div>
+                <div class="answer">
+                    
+                    <strong>Provide API-specific context:</strong>
+                    <ol>
+                        <li><strong>API name/service:</strong> Mention explicitly</li>
+                        <li><strong>Endpoint details:</strong> URL patterns, methods</li>
+                        <li><strong>Auth requirements:</strong> API keys, tokens, OAuth</li>
+                        <li><strong>Response structure:</strong> Expected JSON shape</li>
+                        <li><strong>Error handling:</strong> How to handle failures</li>
+                    </ol>
+                    <strong>Example prompt:</strong>
+                    <div class="code-block">
+// Fetch user repositories from GitHub REST API<br>
+// GET https://api.github.com/users/:username/repos<br>
+// Requires Accept: application/vnd.github+json header<br>
+// Returns array of repo objects with name, description, stars<br>
+// Handle 404 for non-existent users<br>
+async function fetchGitHubRepos(username) {
+                    </div>
+        
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">What is the 'DRY prompting' technique?</div>
+                <div class="answer">
+                    
+                    <strong>DRY (Don't Repeat Yourself) Prompting:</strong> Establish patterns once, then reference them
+                    <br><br>
+                    <strong>Strategy:</strong>
+                    <ol>
+                        <li>Create a well-documented example function first</li>
+                        <li>For similar functions, use minimal prompts referencing the pattern</li>
+                    </ol>
+                    <strong>Example:</strong>
+                    <div class="code-block">
+// First function - detailed<br>
+// CRUD function to create a new user in database<br>
+// Validates input, handles errors, returns created user<br>
+async function createUser(userData) { ... }<br>
+<br>
+// Second function - minimal (references pattern)<br>
+// CRUD function for products (similar to createUser)<br>
+async function createProduct(productData) { // Copilot infers pattern
+                    </div>
+                    <strong>Benefit:</strong> Less repetitive commenting, consistent code patterns
+        
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">How do you prompt for error handling and edge cases?</div>
+                <div class="answer">
+                    
+                    <strong>Explicitly list scenarios to handle:</strong>
+                    <br><br>
+                    <strong>Example prompt with error handling:</strong>
+                    <div class="code-block">
+// Parse JSON string safely<br>
+// Return parsed object on success<br>
+// Return null if JSON is invalid<br>
+// Return null if input is null/undefined<br>
+// Log error for debugging<br>
+function safeJSONParse(jsonString) {
+                    </div>
+                    <strong>Edge case prompting:</strong>
+                    <div class="code-block">
+// Divide two numbers<br>
+// Handle division by zero (return Infinity)<br>
+// Handle negative numbers<br>
+// Round result to 2 decimal places<br>
+function safeDivide(a, b) {
+                    </div>
+                    <strong>Key:</strong> Explicit is better than implicit when it comes to edge cases
+        
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">What is 'prompt scaffolding' and when should you use it?</div>
+                <div class="answer">
+                    
+                    <strong>Prompt Scaffolding:</strong> Providing structural skeleton for Copilot to fill in
+                    <br><br>
+                    <strong>Technique:</strong>
+                    <div class="code-block">
+// User registration handler<br>
+async function registerUser(email, password) {<br>
+  // Step 1: Validate email format<br>
+  <br>
+  // Step 2: Check if user already exists<br>
+  <br>
+  // Step 3: Hash password<br>
+  <br>
+  // Step 4: Save to database<br>
+  <br>
+  // Step 5: Send welcome email<br>
+  <br>
+  // Step 6: Return user object<br>
+}
+                    </div>
+                    <strong>When to use:</strong>
+                    <ul>
+                        <li>Complex multi-step functions</li>
+                        <li>When order of operations matters</li>
+                        <li>To ensure nothing is missed</li>
+                        <li>For team code consistency</li>
+                    </ul>
+        
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">How do you prompt Copilot to generate documentation?</div>
+                <div class="answer">
+                    
+                    <strong>Documentation generation strategies:</strong>
+                    <ol>
+                        <li><strong>After writing code:</strong> Add comment like <code>// JSDoc for above function</code></li>
+                        <li><strong>Use doc comment syntax:</strong> Start with <code>/**</code> and Copilot completes</li>
+                        <li><strong>Request README sections:</strong> <code># Installation Instructions</code></li>
+                    </ol>
+                    <strong>Example for JSDoc:</strong>
+                    <div class="code-block">
+function calculateTax(amount, rate) {<br>
+  return amount * rate;<br>
+}<br>
+<br>
+/**<br>
+ * [Copilot generates full JSDoc here]
+                    </div>
+                    <strong>For README:</strong>
+                    <div class="code-block">
+# Project Setup<br>
+## Prerequisites<br>
+[Copilot lists requirements]<br>
+<br>
+## Installation Steps<br>
+[Copilot provides steps]
+                    </div>
+        
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">What is the 'conversation' approach to prompting Copilot Chat?</div>
+                <div class="answer">
+                    
+                    <strong>Treat Copilot Chat like a pair programming session:</strong>
+                    <br><br>
+                    <strong>Effective conversation flow:</strong>
+                    <ol>
+                        <li><strong>Start broad:</strong> "I need to implement user authentication"</li>
+                        <li><strong>Ask clarifying questions:</strong> "What's the best library for JWT in Node.js?"</li>
+                        <li><strong>Request specific code:</strong> "Generate a middleware function for verifying tokens"</li>
+                        <li><strong>Iterate:</strong> "Can you add error handling for expired tokens?"</li>
+                        <li><strong>Refine:</strong> "Make it compatible with TypeScript"</li>
+                    </ol>
+                    <strong>Benefits:</strong>
+                    <ul>
+                        <li>Builds context incrementally</li>
+                        <li>Catches misunderstandings early</li>
+                        <li>More tailored solutions</li>
+                        <li>Learn while coding</li>
+                    </ul>
+        
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">How do you prompt for refactoring existing code?</div>
+                <div class="answer">
+                    
+                    <strong>Refactoring prompt strategies:</strong>
+                    <br><br>
+                    <strong>In comments:</strong>
+                    <div class="code-block">
+// TODO: Refactor this function to use async/await instead of promises<br>
+function fetchData() {<br>
+  return fetch(url).then(res => res.json()).then(data => data);<br>
+}
+                    </div>
+                    <strong>In Chat:</strong>
+                    <ul>
+                        <li>"Refactor this to be more functional/declarative"</li>
+                        <li>"Extract repeated logic into helper functions"</li>
+                        <li>"Simplify this nested if-else structure"</li>
+                        <li>"Convert this class to use React hooks"</li>
+                    </ul>
+                    <strong>Specify goals:</strong>
+                    <ul>
+                        <li>Better readability</li>
+                        <li>Performance optimization</li>
+                        <li>Following specific pattern (DRY, SOLID, etc.)</li>
+                    </ul>
+        
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">What types of examples improve prompt effectiveness?</div>
+                <div class="answer">
+                    
+                    <strong>Most effective example types:</strong>
+                    <ul>
+                        <li><strong>Input/Output examples:</strong> Show transformation
+                            <div class="code-block">
+// slugify("Hello World!") → "hello-world"<br>
+// slugify("Café au Lait") → "cafe-au-lait"
+                            </div>
+                        </li>
+                        <li><strong>Data structure examples:</strong> Show format
+                            <div class="code-block">
+// users = [{name: "Alice", age: 30}, {name: "Bob", age: 25}]
+                            </div>
+                        </li>
+                        <li><strong>API response examples:</strong> Show JSON shape
+                            <div class="code-block">
+// Response: {success: true, data: {...}, errors: []}
+                            </div>
+                        </li>
+                        <li><strong>Usage examples:</strong> Show how to call
+                            <div class="code-block">
+// const result = await fetchUser(123);
+                            </div>
+                        </li>
+                    </ul>
+        
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">How do you prompt Copilot to follow project-specific conventions?</div>
+                <div class="answer">
+                    
+                    <strong>Establish conventions through code examples:</strong>
+                    <ol>
+                        <li><strong>Create pattern files:</strong> <code>_patterns.ts</code> with documented examples</li>
+                        <li><strong>Use consistent naming:</strong> Copilot learns from repetition</li>
+                        <li><strong>Add convention comments:</strong> Explain your team's standards</li>
+                        <li><strong>Keep examples open:</strong> Open tabs with good examples</li>
+                    </ol>
+                    <strong>Example convention documentation:</strong>
+                    <div class="code-block">
+// PROJECT CONVENTIONS:<br>
+// - All API handlers use async/await (no .then())<br>
+// - Error responses: { success: false, error: "message" }<br>
+// - Success responses: { success: true, data: {...} }<br>
+// - Use try/catch blocks in all handlers<br>
+// - Log errors with logger.error(), not console.log
+                    </div>
+                    <strong>Result:</strong> Copilot adopts your team's style
+        
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">What is negative prompting and when is it useful?</div>
+                <div class="answer">
+                    
+                    <strong>Negative Prompting:</strong> Telling Copilot what NOT to do
+                    <br><br>
+                    <strong>Use cases:</strong>
+                    <ul>
+                        <li>Avoiding deprecated patterns</li>
+                        <li>Preventing security anti-patterns</li>
+                        <li>Steering away from specific libraries</li>
+                    </ul>
+                    <strong>Examples:</strong>
+                    <div class="code-block">
+// Fetch user data WITHOUT using jQuery<br>
+// (use native fetch API)<br>
+<br>
+// Hash password - do NOT use MD5 (insecure)<br>
+// Use bcrypt instead<br>
+<br>
+// Validate input WITHOUT regex (for readability)<br>
+// Use simple string methods
+                    </div>
+                    <div class="warning-box">
+                        <strong>Caution:</strong> Negative prompts are less reliable than positive ones. Better to show what you DO want.
+                    </div>
+        
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">How do you prompt for performance-optimized code?</div>
+                <div class="answer">
+                    
+                    <strong>Performance-focused prompting:</strong>
+                    <br><br>
+                    <strong>Explicit performance requirements:</strong>
+                    <div class="code-block">
+// Find first user with ID (optimize for large arrays)<br>
+// Stop searching after first match<br>
+// Use early return for efficiency<br>
+function findUserById(users, id) {
+                    </div>
+                    <strong>Mention algorithms/complexity:</strong>
+                    <div class="code-block">
+// Sort array of 1M+ items efficiently<br>
+// Use quicksort or native sort (O(n log n))<br>
+// Avoid bubble sort
+                    </div>
+                    <strong>Specify optimization targets:</strong>
+                    <ul>
+                        <li>Time complexity (speed)</li>
+                        <li>Space complexity (memory)</li>
+                        <li>Network efficiency (fewer requests)</li>
+                        <li>Database queries (reduce N+1 problems)</li>
+                    </ul>
+        
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">What is the 'fill-in-the-middle' prompting technique?</div>
+                <div class="answer">
+                    
+                    <strong>Fill-in-the-Middle:</strong> Place cursor between code and let Copilot complete
+                    <br><br>
+                    <strong>Technique:</strong>
+                    <div class="code-block">
+function processOrder(order) {<br>
+  validateOrder(order);<br>
+  <br>
+  [CURSOR HERE] <- Copilot infers logic<br>
+  <br>
+  return confirmationEmail;<br>
+}
+                    </div>
+                    <strong>Copilot uses surrounding context:</strong>
+                    <ul>
+                        <li>Previous line (validation happened)</li>
+                        <li>Next line (expects email variable)</li>
+                        <li>Function name (processing order)</li>
+                    </ul>
+                    <strong>Result:</strong> Generates logical middle steps like charge payment, update inventory, create email
+        
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">How do you prompt Copilot for database queries?</div>
+                <div class="answer">
+                    
+                    <strong>Database query prompting best practices:</strong>
+                    <ol>
+                        <li><strong>Specify database type:</strong> PostgreSQL, MongoDB, MySQL, etc.</li>
+                        <li><strong>Describe schema:</strong> Table/collection structure</li>
+                        <li><strong>State ORM if used:</strong> Prisma, TypeORM, Mongoose</li>
+                        <li><strong>List requirements:</strong> What data to retrieve, conditions</li>
+                    </ol>
+                    <strong>Example prompt:</strong>
+                    <div class="code-block">
+// Prisma query to find all users<br>
+// Where account is active<br>
+// And last login within 30 days<br>
+// Include related orders<br>
+// Order by name ascending<br>
+const activeUsers = await prisma.user.findMany({
+                    </div>
+                    <strong>Result:</strong> Copilot generates properly formatted ORM query
+        
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">What is progressive refinement in prompting?</div>
+                <div class="answer">
+                    
+                    <strong>Progressive Refinement:</strong> Start simple, add details iteratively
+                    <br><br>
+                    <strong>Approach:</strong>
+                    <ol>
+                        <li><strong>Round 1:</strong> Basic function prompt
+                            <div class="code-block">// Function to validate phone numbers</div>
+                        </li>
+                        <li><strong>Round 2:</strong> Add format requirements
+                            <div class="code-block">// Accepts (123) 456-7890 and 123-456-7890 formats</div>
+                        </li>
+                        <li><strong>Round 3:</strong> Add edge cases
+                            <div class="code-block">// Return false for international numbers</div>
+                        </li>
+                        <li><strong>Round 4:</strong> Add error handling
+                            <div class="code-block">// Handle null/undefined gracefully</div>
+                        </li>
+                    </ol>
+                    <strong>Benefits:</strong> Easier to review changes, catch issues early, maintain code quality
+        
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">How do you use Copilot Chat for learning while coding?</div>
+                <div class="answer">
+                    
+                    <strong>Learning-focused Chat prompts:</strong>
+                    <ul>
+                        <li><strong>Explain code:</strong> "Explain what this regex does: /^[a-z0-9]+$/"</li>
+                        <li><strong>Compare approaches:</strong> "What's the difference between map() and forEach()?"</li>
+                        <li><strong>Best practices:</strong> "What's the best way to handle errors in async functions?"</li>
+                        <li><strong>Troubleshooting:</strong> "Why is this giving a null reference error?"</li>
+                        <li><strong>Alternatives:</strong> "Show me 3 ways to filter an array"</li>
+                    </ul>
+                    <strong>Format for better explanations:</strong>
+                    <ul>
+                        <li>"Explain like I'm 5: [concept]"</li>
+                        <li>"What are the pros and cons of [approach]?"</li>
+                        <li>"When should I use X vs. Y?"</li>
+                    </ul>
+        
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">What are anti-patterns in prompting to avoid?</div>
+                <div class="answer">
+                    
+                    <strong>Common prompting mistakes:</strong>
+                    <ul>
+                        <li>❌ <strong>Too vague:</strong> <code>// do something</code></li>
+                        <li>❌ <strong>Conflicting requirements:</strong> "Make it fast and use recursion"</li>
+                        <li>❌ <strong>Over-specifying implementation:</strong> "Use a while loop with counter i"</li>
+                        <li>❌ <strong>Assuming knowledge:</strong> "Use the usual pattern" (what's usual?)</li>
+                        <li>❌ <strong>No examples:</strong> Abstract descriptions without concrete cases</li>
+                        <li>❌ <strong>Ignoring context:</strong> Not keeping related files open</li>
+                    </ul>
+                    <strong>Instead, do this:</strong>
+                    <ul>
+                        <li>✅ Be specific about goals, flexible about implementation</li>
+                        <li>✅ Provide examples and edge cases</li>
+                        <li>✅ Give context through open files and comments</li>
+                        <li>✅ Iterate and refine based on suggestions</li>
+                    </ul>
+        
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">How do you prompt for accessibility-compliant code?</div>
+                <div class="answer">
+                    
+                    <strong>Accessibility prompting strategies:</strong>
+                    <br><br>
+                    <strong>For HTML/UI:</strong>
+                    <div class="code-block">
+// Create button component<br>
+// Must be keyboard accessible (Enter/Space)<br>
+// Include ARIA labels for screen readers<br>
+// Focus visible for keyboard navigation<br>
+// Color contrast WCAG AA compliant
+                    </div>
+                    <strong>For JavaScript:</strong>
+                    <div class="code-block">
+// Modal dialog that traps focus<br>
+// Escape key closes modal<br>
+// Returns focus to trigger element on close<br>
+// Announces to screen readers when opening
+                    </div>
+                    <strong>Explicit ARIA requirements:</strong> Mention aria-label, role attributes, semantic HTML
+        
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">What role does the cursor position play in prompting?</div>
+                <div class="answer">
+                    
+                    <strong>Cursor position signals intent:</strong>
+                    <br><br>
+                    <strong>Inside function:</strong>
+                    <div class="code-block">
+function calculate() {<br>
+  // Prompts here generate function body<br>
+  [CURSOR]
+                    </div>
+                    <strong>After function:</strong>
+                    <div class="code-block">
+function first() { ... }<br>
+<br>
+[CURSOR] <- Suggests new related function
+                    </div>
+                    <strong>In parameters:</strong>
+                    <div class="code-block">
+function transform([CURSOR]) <- Suggests parameter names/types
+                    </div>
+                    <strong>In JSDoc:</strong>
+                    <div class="code-block">
+/**<br>
+ * [CURSOR] <- Generates full documentation
+                    </div>
+                    <strong>Tip:</strong> Position cursor strategically to get the type of completion you want
+        
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">How do you leverage Copilot for code reviews?</div>
+                <div class="answer">
+                    
+                    <strong>Code review with Copilot Chat:</strong>
+                    <br><br>
+                    <strong>Review prompts:</strong>
+                    <ul>
+                        <li>"Review this function for potential bugs"</li>
+                        <li>"Check for security vulnerabilities in this code"</li>
+                        <li>"Suggest performance improvements"</li>
+                        <li>"Identify code smells or anti-patterns"</li>
+                        <li>"Does this follow SOLID principles?"</li>
+                    </ul>
+                    <strong>Targeted questions:</strong>
+                    <ul>
+                        <li>"Is this function too complex? (McCabe complexity)"</li>
+                        <li>"Are there edge cases I'm missing?"</li>
+                        <li>"Is error handling comprehensive enough?"</li>
+                        <li>"Could this be more readable?"</li>
+                    </ul>
+                    <div class="info-box">
+                        <strong>Best Practice:</strong> Use Copilot as a first pass, but human review is still essential
+                    </div>
+        
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">What's the best way to prompt for multi-language projects?</div>
+                <div class="answer">
+                    
+                    <strong>Multi-language prompting strategies:</strong>
+                    <ol>
+                        <li><strong>Explicit language mention:</strong>
+                            <div class="code-block">
+// Python function to parse CSV (not JavaScript)<br>
+def parse_csv(file_path):
+                            </div>
+                        </li>
+                        <li><strong>File extensions:</strong> Save with correct extension (.py, .ts, .java)</li>
+                        <li><strong>Language-specific imports:</strong> Show relevant libraries</li>
+                        <li><strong>Syntax cues:</strong> Use language-specific syntax in comments</li>
+                    </ol>
+                    <strong>For polyglot codebases:</strong>
+                    <ul>
+                        <li>Keep language-specific files open</li>
+                        <li>Mention target language explicitly in prompts</li>
+                        <li>Use language-specific conventions in naming</li>
+                    </ul>
+        
+                </div>
+            </div>
+
+            <div class="qa-item">
+                <div class="question">How do you measure and improve your prompting skills?</div>
+                <div class="answer">
+                    
+                    <strong>Prompting skill development:</strong>
+                    <br><br>
+                    <strong>Track metrics:</strong>
+                    <ul>
+                        <li><strong>Acceptance rate:</strong> How often you accept suggestions</li>
+                        <li><strong>First-suggestion accuracy:</strong> Gets it right immediately</li>
+                        <li><strong>Iteration count:</strong> Refinements needed</li>
+                        <li><strong>Time saved:</strong> Before/after Copilot comparison</li>
+                    </ul>
+                    <strong>Improvement strategies:</strong>
+                    <ol>
+                        <li><strong>Experiment:</strong> Try different prompt styles</li>
+                        <li><strong>Learn from rejections:</strong> Why didn't the suggestion work?</li>
+                        <li><strong>Study accepted suggestions:</strong> What made them good?</li>
+                        <li><strong>Share best practices:</strong> Team knowledge sharing</li>
+                        <li><strong>Keep notes:</strong> Document effective patterns</li>
+                    </ol>
+                    <strong>Goal:</strong> Increase acceptance rate from 25% to 40%+ through better prompting
+        
+                </div>
+            </div>
+
+        </div>
+
+        <footer>
+            <p>GitHub Copilot Q&A - Topic 7 of 11 | © 2025</p>
+        </footer>
+    </div>
+
+    <script>
+        document.querySelectorAll('.question').forEach(question => {
+            question.addEventListener('click', function() {
+                const answer = this.nextElementSibling;
+                answer.style.display = answer.style.display === 'none' ? 'block' : 'none';
+            });
+        });
+    </script>
+</body>
+</html>
